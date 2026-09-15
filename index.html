@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Five Star Bets | SportyBet Style</title>
+<title>Five Star Bets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, sans-serif}
 body{background:#eef0f3}
-.top{background:#00a826; color:white; padding:10px 15px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10}
-.logo{font-weight:900; font-size:20px; letter-spacing:0.5px}
+.top{background:#00a826; color:white; padding:12px 15px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10}
+.logo{font-weight:900; font-size:20px}
 .top-right{display:flex; gap:10px; align-items:center}
-.bal{background:rgba(0,0,0,0.2); padding:5px 12px; border-radius:20px; font-weight:bold; font-size:14px}
-.btn-dep{background:#ffcc00; color:#000; border:none; padding:6px 14px; border-radius:4px; font-weight:800; cursor:pointer}
+.bal{background:rgba(0,0,0,0.25); padding:6px 14px; border-radius:20px; font-weight:bold; font-size:14px}
+.btn-dep{background:#ffcc00; color:#000; border:none; padding:7px 16px; border-radius:5px; font-weight:900; cursor:pointer}
 .nav{background:white; display:flex; overflow-x:auto; border-bottom:1px solid #ddd}
-.nav div{padding:12px 18px; font-weight:700; font-size:13px; white-space:nowrap; cursor:pointer; color:#666; border-bottom:3px solid transparent}
+.nav div{padding:13px 18px; font-weight:700; font-size:13px; white-space:nowrap; color:#666; border-bottom:3px solid transparent}
 .nav div.active{color:#00a826; border-bottom:3px solid #00a826}
-.banner{background:linear-gradient(90deg, #00a826, #00d231); color:white; margin:10px; border-radius:8px; padding:15px; display:flex; justify-content:space-between; align-items:center}
-.banner h3{font-size:16px}
-.banner button{background:white; color:#00a826; border:none; padding:8px 15px; border-radius:4px; font-weight:800}
+.banner{background:linear-gradient(90deg, #00a826, #00d231); color:white; margin:10px; border-radius:8px; padding:16px; display:flex; justify-content:space-between; align-items:center}
+.banner button{background:white; color:#00a826; border:none; padding:8px 16px; border-radius:5px; font-weight:900}
 .matches{background:white; margin:10px; border-radius:8px; overflow:hidden}
 .match-header{background:#f5f5f5; padding:10px 15px; font-weight:700; font-size:12px; display:flex; justify-content:space-between; color:#666}
-.match{padding:12px 15px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center}
-.teams{font-size:13px; font-weight:600; width:40%}
-.odds{display:flex; gap:5px}
-.odd{background:#f0f0f0; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:800; cursor:pointer; min-width:45px; text-align:center}
-.odd:hover{background:#00a826; color:white}
+.match{padding:14px 15px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center}
+.teams{font-size:13px; font-weight:600; width:45%}
+.odds{display:flex; gap:6px}
+.odd{background:#f0f0f0; padding:7px 13px; border-radius:4px; font-size:12px; font-weight:800; cursor:pointer; min-width:48px; text-align:center}
 .odd.active{background:#00a826; color:white}
-.betslip{position:fixed; bottom:0; left:0; right:0; background:#121212; color:white; padding:12px 15px; display:flex; justify-content:space-between; align-items:center; border-radius:12px 12px 0 0}
+.betslip{position:fixed; bottom:0; left:0; right:0; background:#121212; color:white; padding:13px 15px; display:flex; justify-content:space-between; align-items:center; border-radius:12px 12px 0 0}
 .betslip button{background:#00ff88; color:#000; border:none; padding:10px 25px; border-radius:6px; font-weight:900}
 </style>
 </head>
@@ -48,45 +46,39 @@ body{background:#eef0f3}
 </div>
 
 <div class="banner">
-  <div>
-    <h3>Welcome Bonus 300%!</h3>
-    <p style="font-size:12px">Deposit now & get bonus</p>
-  </div>
+  <div><h3>300% Welcome Bonus!</h3><p style="font-size:12px">Deposit now & get bonus</p></div>
   <button onclick="deposit()">CLAIM NOW</button>
 </div>
 
 <div class="matches">
-  <div class="match-header"><span>Today • Premier League</span><span>1 &nbsp;&nbsp; X &nbsp;&nbsp; 2</span></div>
-  
+  <div class="match-header"><span>Today • Premier League</span><span>1 &nbsp; X &nbsp; 2</span></div>
   <div class="match">
     <div class="teams">Arsenal<br><small style="color:#888">vs Chelsea - 19:45</small><br>Chelsea</div>
     <div class="odds">
-      <div class="odd" onclick="addBet(this, 'Arsenal 2.45')">2.45</div>
-      <div class="odd" onclick="addBet(this, 'Draw 3.20')">3.20</div>
-      <div class="odd" onclick="addBet(this, 'Chelsea 2.85')">2.85</div>
+      <div class="odd" onclick="addBet(this)">2.45</div>
+      <div class="odd" onclick="addBet(this)">3.20</div>
+      <div class="odd" onclick="addBet(this)">2.85</div>
     </div>
   </div>
-
   <div class="match">
     <div class="teams">Man City<br><small style="color:#888">vs Liverpool - 21:00</small><br>Liverpool</div>
     <div class="odds">
-      <div class="odd" onclick="addBet(this, 'Man City 1.95')">1.95</div>
-      <div class="odd" onclick="addBet(this, 'Draw 3.50')">3.50</div>
-      <div class="odd" onclick="addBet(this, 'Liverpool 3.80')">3.80</div>
+      <div class="odd" onclick="addBet(this)">1.95</div>
+      <div class="odd" onclick="addBet(this)">3.50</div>
+      <div class="odd" onclick="addBet(this)">3.80</div>
     </div>
   </div>
-
   <div class="match">
     <div class="teams">Barcelona<br><small style="color:#888">vs Real Madrid - 20:00</small><br>Real Madrid</div>
     <div class="odds">
-      <div class="odd" onclick="addBet(this, 'Barca 2.10')">2.10</div>
-      <div class="odd" onclick="addBet(this, 'Draw 3.30')">3.30</div>
-      <div class="odd" onclick="addBet(this, 'Real 3.10')">3.10</div>
+      <div class="odd" onclick="addBet(this)">2.10</div>
+      <div class="odd" onclick="addBet(this)">3.30</div>
+      <div class="odd" onclick="addBet(this)">3.10</div>
     </div>
   </div>
 </div>
 
-<div style="height:80px"></div>
+<div style="height:90px"></div>
 
 <div class="betslip">
   <div><span id="betCount">0</span> Selections | Odds: <span id="totalOdds">0.00</span></div>
@@ -94,44 +86,59 @@ body{background:#eef0f3}
 </div>
 
 <script>
-let balance = localStorage.getItem('five_star_balance') || 0;
-document.getElementById('bal').innerText = balance;
+// BALANCE
+let bal = localStorage.getItem('five_star_balance') || 0;
+document.getElementById('bal').innerText = bal;
 let betCount = 0;
-let odds = 1;
+let totalOdds = 1;
 
+// FIXED DEPOSIT - 100% WORKING
 function deposit(){
-  let amount = prompt("Enter deposit amount ₦ (min 100):","1000");
-  if(!amount || isNaN(amount) || amount<100) return;
-  localStorage.setItem('last_deposit', amount);
-  window.open("https://paystack.shop/pay/mmbwjiunsi","_blank");
-  setTimeout(()=>{
-    if(confirm("Did you complete payment of ₦"+amount+"? Click OK to add to balance")){
-      let newBal = parseFloat(localStorage.getItem('five_star_balance')||0) + parseFloat(amount);
-      localStorage.setItem('five_star_balance', newBal);
-      location.reload();
-    }
-  },4000);
+  // This goes straight to your Paystack - no popup blocker
+  window.location.href = "https://paystack.shop/pay/mmbwjiunsi";
 }
 
-function addBet(el, name){
+function addBet(el){
   el.classList.toggle('active');
-  if(el.classList.contains('active')){ betCount++; odds = (parseFloat(odds) * parseFloat(el.innerText)).toFixed(2); }
-  else{ betCount--; odds = (parseFloat(odds) / parseFloat(el.innerText)).toFixed(2); if(betCount==0) odds=1; }
+  if(el.classList.contains('active')){
+    betCount++;
+    totalOdds = (parseFloat(totalOdds) * parseFloat(el.innerText)).toFixed(2);
+  } else {
+    betCount--;
+    totalOdds = (parseFloat(totalOdds) / parseFloat(el.innerText)).toFixed(2);
+    if(betCount==0) totalOdds = 1;
+  }
   document.getElementById('betCount').innerText = betCount;
-  document.getElementById('totalOdds').innerText = betCount==0? "0.00" : odds;
+  document.getElementById('totalOdds').innerText = betCount==0 ? "0.00" : totalOdds;
 }
 
 function placeBet(){
-  if(betCount==0){ alert("Select at least one odd!"); return; }
-  let stake = prompt("Enter stake amount, Balance: ₦"+balance, "100");
+  if(betCount==0){ alert("Select odds first!"); return; }
+  let stake = prompt("Enter stake amount, Balance: ₦"+bal, "100");
   if(!stake) return;
-  if(parseFloat(stake) > parseFloat(balance)){ alert("Insufficient balance! Please DEPOSIT"); deposit(); return; }
-  let win = (parseFloat(stake) * parseFloat(odds)).toFixed(2);
+  if(parseFloat(stake) > parseFloat(bal)){ 
+    alert("Insufficient balance! Please DEPOSIT first!");
+    deposit();
+    return; 
+  }
+  let win = (parseFloat(stake) * parseFloat(totalOdds)).toFixed(2);
   if(confirm("Place bet of ₦"+stake+" to win ₦"+win+"?")){
-    let newBal = parseFloat(balance) - parseFloat(stake);
+    let newBal = parseFloat(bal) - parseFloat(stake);
     localStorage.setItem('five_star_balance', newBal);
-    alert("Bet placed! Good luck! Potential win: ₦"+win);
+    alert("Bet placed! Potential win: ₦"+win);
     location.reload();
+  }
+}
+
+// Handle return from Paystack - add balance manually after payment
+let params = new URLSearchParams(window.location.search);
+if(params.get('paid') == 'true'){
+  let last = prompt("Enter amount you paid on Paystack to add to balance:", "1000");
+  if(last){
+    let newBal = parseFloat(localStorage.getItem('five_star_balance')||0) + parseFloat(last);
+    localStorage.setItem('five_star_balance', newBal);
+    alert("₦"+last+" added! New balance: ₦"+newBal);
+    window.location.href = window.location.pathname;
   }
 }
 </script>
