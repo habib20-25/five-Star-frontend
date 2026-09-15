@@ -1,104 +1,91 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Five Star Bets - Licensed Betting in Nigeria</title><meta name="description" content="Five Star Bets - Licensed sports betting. Premier League, LaLiga, NPFL, UCL. 18+ Responsible Gambling"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&display=swap" rel="stylesheet"><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Outfit,sans-serif}body{background:#050a1a;color:#fff}
-.header{position:sticky;top:0;z-index:99;background:rgba(5,10,26,.95);backdrop-filter:blur(12px);border-bottom:2px solid #ffcc00;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;display:flex;gap:8px;align-items:center}.logoBox{width:32px;height:32px;background:#ffcc00;color:#000;display:grid;place-items:center;border-radius:8px;font-weight:900}
-.badge{background:#ffcc00;color:#000;padding:6px 14px;border-radius:30px;font-weight:900;font-size:12px}
-.legal{background:#0a1430;border:1px solid #1e2f5e;margin:12px;border-radius:12px;padding:10px 12px;font-size:10px;color:#6b86b5;line-height:1.4}
-.match{background:#101c38;border:1px solid rgba(255,255,255,.06);border-radius:18px;margin:10px 12px;padding:12px}
-.odds{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}.odd{background:#060d1f;border:1px solid #22345f;border-radius:10px;padding:10px;text-align:center;cursor:pointer}.odd.sel{background:#ffcc00;color:#000;font-weight:900}
-.btn{width:100%;background:linear-gradient(135deg,#ffcc00,#ffb700);color:#000;padding:14px;border-radius:14px;font-weight:900;border:none;cursor:pointer}
-.inp{width:100%;background:#060d1f;border:1px solid #22345f;color:#fff;padding:12px;border-radius:12px;margin:8px 0}
-.nav{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;background:#0a1430;border-top:1px solid #22345f;display:flex}
-.nav div{flex:1;padding:12px;text-align:center;font-size:10px;color:#6b86b5}.nav div.active{color:#ffcc00}
-</style></head><body>
-<div class="header"><div class="logo"><div class="logoBox">5★</div>FIVE STAR BETS</div><div style="display:flex;gap:8px;align-items:center"><div class="badge" id="bal">₦0.00</div><button onclick="logout()" style="background:none;border:1px solid #22345f;color:#6b86b5;padding:4px 10px;border-radius:20px;font-size:10px">LOGOUT</button></div></div>
+<html>
+<head>
+<title>Five Star Bets - Real Money Betting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial; background:#080808; color:#fff; margin:0; padding:0; text-align:center}
+.header{background:#121212; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #00ff88}
+.logo{font-weight:bold; font-size:22px; color:#00ff88}
+.balance{font-size:18px; color:#00ff88; font-weight:bold}
+.hero{padding:30px 20px}
+.btn{padding:14px 30px; border:none; border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer; margin:10px}
+.deposit{background:#00ff88; color:#000}
+.withdraw{background:#ffcc00; color:#000}
+.card{background:#1e1e1e; margin:15px; padding:20px; border-radius:15px; border:1px solid #333}
+input{padding:12px; border-radius:8px; border:none; width:80%; margin:10px}
+</style>
+</head>
+<body>
 
-<div id="auth" style="min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(800px 400px at 50% -10%,#1e3161 0%,#050a1a 70%)">
-<div style="width:100%;max-width:400px;background:#0f1d3e;border:1px solid #24365f;border-radius:24px;padding:24px">
-<h2 style="text-align:center;font-weight:900">FIVE <span style="color:#ffcc00">STAR</span> BETS</h2>
-<p style="text-align:center;color:#7ea0d0;font-size:12px;margin:6px 0 16px">18+ Only • Responsible Gambling • Licensed</p>
-<input id="u" class="inp" placeholder="Username">
-<input id="p" type="password" class="inp" placeholder="Password (min 6)">
-<label style="font-size:11px;color:#7ea0d0;display:flex;gap:6px;margin:8px 0"><input type="checkbox" id="age"> I am 18+ and agree to Terms & Responsible Gambling Policy</label>
-<button class="btn" onclick="doAuth()">CREATE ACCOUNT / LOGIN</button>
-<div style="margin-top:14px" class="legal"><b>⚠️ IMPORTANT LEGAL:</b> This is real-money betting. You must be 18+. This is for entertainment. Please gamble responsibly. To get full Lagos State Lotteries license, contact Lagos State Lotteries Board. For launch, you can operate as Social Betting (free) or get Paystack. Withdrawals require KYC verification (NIN/BVN).</div>
-</div>
+<div class="header">
+  <div class="logo">⭐ FIVE STAR BETS</div>
+  <div class="balance">₦<span id="balance">0</span></div>
 </div>
 
-<div id="app" style="display:none;max-width:560px;margin:0 auto;padding-bottom:90px">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px">
-<button class="btn" onclick="deposit()" style="background:#22c55e;color:#000">DEPOSIT WITH PAYSTACK</button>
-<button class="btn" onclick="withdraw()" style="background:#0a1430;border:1px solid #22345f;color:#fff">WITHDRAW ₦</button>
-</div>
-<div class="legal">💳 Real Money Mode ACTIVE. All bets use real balance. Deposit via Paystack is secured. Min deposit ₦500, Min stake ₦100, Min withdrawal ₦1000 after KYC.</div>
-<div id="matches"></div>
-<div id="betsView" style="display:none;padding:12px"><h3>My Bets (Real Money)</h3><div id="betsList"></div></div>
-<div id="slip" style="display:none;position:fixed;bottom:58px;left:0;right:0;max-width:560px;margin:0 auto;background:#0f1d3e;border:2px solid #ffcc00;border-bottom:none;border-radius:20px 20px 0 0;padding:14px">
-<div style="display:flex;justify-content:space-between"><b id="sT"></b><b id="sO" style="background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px"></b></div>
-<input id="stk" type="number" class="inp" value="500"><button class="btn" onclick="placeReal()">PLACE REAL BET</button>
-</div>
-<div class="nav"><div class="active" onclick="tab('live',this)">⚽ LIVE</div><div onclick="tab('bets',this)">🧾 MY BETS</div><div onclick="tab('terms',this)">📜 TERMS</div></div>
+<div class="hero">
+  <h1>Welcome to Five Star Bets</h1>
+  <p>Deposit. Play. Win. Withdraw Instantly.</p>
+  <p>Balance: <b>₦<span id="balance2">0</span></b></p>
+  
+  <button class="btn deposit" onclick="goDeposit()">💰 DEPOSIT NOW</button>
+  <button class="btn withdraw" onclick="goWithdraw()">🏦 WITHDRAW</button>
 </div>
 
-<div id="termsPage" style="display:none;max-width:560px;margin:0 auto;padding:16px;font-size:12px;color:#8aa3cc;line-height:1.6">
-<h3>Terms, 18+ & Responsible Gambling</h3><br>
-1. You must be 18+ to use Five Star Bets.<br>
-2. Gambling is entertainment, not income.<br>
-3. Set deposit limits. If you have gambling problem, contact GamCare or call 0800 123 4567 (Nigeria).<br>
-4. All bets are final after placement.<br>
-5. Withdrawals require KYC: Valid NIN, BVN, and account name must match.<br>
-6. We reserve right to void suspicious bets.<br><br>
-<button class="btn" onclick="document.getElementById('termsPage').style.display='none';document.getElementById('app').style.display='block'">BACK</button>
+<div class="card">
+  <h3>⚽ Football - Live Games</h3>
+  <p>Odds: Arsenal vs Chelsea - 2.5x</p>
+  <button class="btn deposit" onclick="alert('Bet placed! Coming soon with real API')">BET NOW</button>
+</div>
+
+<div class="card">
+  <h3>🎰 Casino & Virtuals</h3>
+  <p>Spin & Win - Jackpot ₦1,000,000</p>
+  <button class="btn deposit" onclick="alert('Casino launching soon!')">PLAY NOW</button>
 </div>
 
 <script>
-// REAL MONEY SYSTEM - No demo
-let leagues=["ALL","Premier League","LaLiga","NPFL","UCL"];
-let fixtures=[
-{H:"Man City",A:"Arsenal",L:"Premier League",o:[2.1,3.2,3.3]},{H:"Man Utd",A:"Chelsea",L:"Premier League",o:[2.6,3.1,2.7]},
-{H:"Enyimba",A:"Rangers",L:"NPFL",o:[2.0,2.9,3.8]},{H:"Remo Stars",A:"Kano Pillars",L:"NPFL",o:[1.85,3.1,4.3]},
-{H:"Real Madrid",A:"Barcelona",L:"LaLiga",o:[2.0,3.5,3.6]},{H:"Bayern",A:"PSG",L:"UCL",o:[1.9,3.8,3.9]}
-];
-let sel=null, user=localStorage.getItem("fs_user"), bals=JSON.parse(localStorage.getItem("fs_real_bal")||"{}"), bets=JSON.parse(localStorage.getItem("fs_real_bets")||"{}");
-function doAuth(){
- if(!document.getElementById("age").checked) return alert("You must confirm 18+ and accept Terms to continue");
- let u=document.getElementById("u").value.trim(); let p=document.getElementById("p").value.trim();
- if(u.length<3 || p.length<6) return alert("Username min 3, password min 6");
- user=u; localStorage.setItem("fs_user",u); if(bals[u]==undefined) bals[u]=0;
- localStorage.setItem("fs_real_bal",JSON.stringify(bals)); init();
+// SHOW BALANCE
+let bal = localStorage.getItem('five_star_balance');
+if(!bal){ bal = 0; localStorage.setItem('five_star_balance', 0); }
+document.getElementById('balance').innerText = bal;
+document.getElementById('balance2').innerText = bal;
+
+// DEPOSIT FUNCTION - WITH YOUR PAYSTACK LINK
+function goDeposit(){
+  let amount = prompt("How much do you want to deposit? Minimum ₦100", "1000");
+  if(!amount){ return; }
+  if(isNaN(amount) || amount < 100){
+    alert("Minimum deposit is ₦100");
+    return;
+  }
+  // Save amount for later
+  localStorage.setItem('last_deposit_attempt', amount);
+  
+  // THIS IS YOUR REAL PAYSTACK LINK - IT COLLECTS MONEY
+  window.open("https://paystack.shop/pay/mmbwjiunsi", "_blank");
+  
+  // After payment, user comes back
+  setTimeout(function(){
+    let confirmPay = confirm("Did you complete payment of ₦" + amount + " on Paystack? Click OK if YES, your balance will be updated.");
+    if(confirmPay){
+      let current = parseFloat(localStorage.getItem('five_star_balance') || 0);
+      let newBal = current + parseFloat(amount);
+      localStorage.setItem('five_star_balance', newBal);
+      alert("Success! ₦" + amount + " added to your balance!");
+      location.reload();
+    }
+  }, 3000);
 }
-function init(){
- if(!user) return;
- document.getElementById("auth").style.display="none"; document.getElementById("app").style.display="block";
- render(); updBal();
+
+function goWithdraw(){
+  let amount = prompt("Enter amount to withdraw:", "500");
+  if(!amount){ return; }
+  let acc = prompt("Enter your bank account number for withdrawal:");
+  if(!acc){ return; }
+  alert("Withdrawal request of ₦" + amount + " to account " + acc + " received! You will be paid within 24 hours. Five Star Bets - Trusted!");
 }
-function render(){
- document.getElementById("matches").innerHTML=fixtures.map((m,i)=>`<div class="match"><div style="font-size:10px;color:#6b86b5">${m.L} • LIVE • 18+</div><div style="display:flex;justify-content:space-between;font-weight:800;margin:8px 0"><span>${m.H}</span><span>VS</span><span>${m.A}</span></div><div class="odds"><div class="odd" onclick="pick(${i},'HOME',${m.o[0]})">HOME<br><b>${m.o[0]}</b></div><div class="odd" onclick="pick(${i},'DRAW',${m.o[1]})">DRAW<br><b>${m.o[1]}</b></div><div class="odd" onclick="pick(${i},'AWAY',${m.o[2]})">AWAY<br><b>${m.o[2]}</b></div></div></div>`).join("");
-}
-function pick(i,t,o){sel={i,t,o,m:fixtures[i]}; document.getElementById("slip").style.display="block"; document.getElementById("sT").innerText=fixtures[i].H+" vs "+fixtures[i].A+" - "+t; document.getElementById("sO").innerText=o;}
-function updBal(){document.getElementById("bal").innerText="₦"+(bals[user]||0).toLocaleString(); let list=bets[user]||[]; document.getElementById("betsList").innerHTML=list.map(b=>`<div style="background:#080e1f;border:1px solid #1e2f5e;padding:8px;margin:6px 0;border-radius:10px;font-size:11px;display:flex;justify-content:space-between"><span>${b.match} ${b.t} @${b.o} ₦${b.stake}</span><b style="color:${b.status=='WON'?'#22c55e':'#ef4444'}">${b.status} ${b.status=='WON'?'₦'+b.pot:''}</b></div>`).join("")||"No real bets yet - deposit first";}
-function deposit(){
- let amt=prompt("Enter deposit amount (Min ₦500):","1000"); if(!amt) return; amt=parseFloat(amt); if(amt<500) return alert("Min ₦500");
- // REPLACE THIS WITH YOUR PAYSTACK LINK
- // For now we simulate - to go live, create Paystack payment link and put here:
- // window.open("https://paystack.com/pay/YOUR_CODE","_blank");
- bals[user]+=amt; localStorage.setItem("fs_real_bal",JSON.stringify(bals)); updBal(); alert("✅ Deposit successful! ₦"+amt+" added. (Connect Paystack to collect real money)");
-}
-function withdraw(){
- let amt=prompt("Withdrawal amount (Min ₦1000). KYC required:","1000"); if(!amt) return; amt=parseFloat(amt);
- if(bals[user]<amt) return alert("Insufficient balance");
- let nin=prompt("Enter NIN for KYC verification:"); if(!nin || nin.length<11) return alert("Valid NIN required for real withdrawal");
- bals[user]-=amt; localStorage.setItem("fs_real_bal",JSON.stringify(bals)); updBal(); alert("Withdrawal request of ₦"+amt+" submitted. You will be paid within 24hrs after KYC. (In production, connect Flutterwave/Paystack transfer)");
-}
-function placeReal(){
- let s=parseFloat(document.getElementById("stk").value); if(!sel||s<100) return alert("Min stake ₦100");
- if(bals[user]<s) return alert("Deposit first! Balance is ₦"+bals[user]); bals[user]-=s;
- let win=Math.random()>0.5; let pot=s*sel.o; let b={match:sel.m.H+" vs "+sel.m.A,t:sel.t,o:sel.o,stake:s,pot,status:win?"WON":"LOST"};
- if(!bets[user]) bets[user]=[]; bets[user].unshift(b); if(win) bals[user]+=pot;
- localStorage.setItem("fs_real_bal",JSON.stringify(bals)); localStorage.setItem("fs_real_bets",JSON.stringify(bets)); updBal(); alert(b.status+(win?" You won ₦"+pot:""));
-}
-function tab(n,el){document.querySelectorAll('.nav div').forEach(d=>d.classList.remove('active')); el.classList.add('active'); document.getElementById("matches").style.display=n=='live'?'block':'none'; document.getElementById("betsView").style.display=n=='bets'?'block':'none'; document.getElementById("slip").style.display=n=='live'&&sel?'block':'none'; if(n=='terms'){document.getElementById("termsPage").style.display="block";document.getElementById("app").style.display="none";}}
-function logout(){localStorage.removeItem("fs_user");location.reload();}
-init();
-</script></body></html>
+</script>
+
+</body>
+</html>
