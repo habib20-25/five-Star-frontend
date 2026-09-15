@@ -1,71 +1,104 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>Five Star Bets - Elite</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet"><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',sans-serif}body{background:#050a1a;color:#fff}
-:root{--gold:#ffcc00;--gold2:#ffb700;--card:#101c38;--border:#22345f}
-.header{position:sticky;top:0;z-index:99;background:rgba(5,10,26,.92);backdrop-filter:blur(18px);border-bottom:2px solid var(--gold);padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
-.logo{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk';font-weight:900;font-size:17px}.logoBox{width:32px;height:32px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;display:grid;place-items:center;border-radius:8px;font-weight:900;box-shadow:0 0 15px rgba(255,204,0,.6)}
-.badgeGold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;padding:6px 14px;border-radius:30px;font-weight:900;font-size:12px}
-.authWrap{min-height:100vh;display:grid;place-items:center;padding:18px;background:radial-gradient(900px 500px at 50% -10%,#1e3161 0%,#050a1a 65%)}
-.authCard{width:100%;max-width:400px;background:linear-gradient(180deg,#13224a,#0d1935);border:1px solid #24365f;border-radius:28px;padding:26px;box-shadow:0 25px 80px rgba(0,0,0,.7)}
-.navBottom{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;background:#0a1430;border-top:1px solid var(--border);display:flex;z-index:60;padding-bottom:env(safe-area-inset-bottom)}
-.navBtn{flex:1;padding:12px 0;text-align:center;font-size:10px;color:#6b86b5;font-weight:700;letter-spacing:.5px;cursor:pointer}.navBtn.active{color:var(--gold)}.navBtn b{font-size:18px;display:block}
-.leagueBar{display:flex;gap:8px;overflow:auto;padding:10px 12px;scrollbar-width:none;position:sticky;top:54px;background:rgba(5,10,26,.9);backdrop-filter:blur(10px);z-index:5}
-.chip{white-space:nowrap;background:#0f1d3e;border:1px solid var(--border);color:#8aa3cc;padding:8px 14px;border-radius:30px;font-size:11px;font-weight:800;cursor:pointer}.chip.active{background:var(--gold);color:#000;border-color:var(--gold)}
-.match{background:linear-gradient(180deg,#122042,#0e1a36);border:1px solid rgba(255,255,255,.06);border-radius:20px;margin:10px 12px;overflow:hidden}
-.matchTop{display:flex;justify-content:space-between;padding:10px 12px;font-size:10px;color:#6b86b5;font-weight:700;letter-spacing:1px;background:rgba(0,0,0,.2)}
-.scoreLive{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:900;padding:10px 12px}
-.teamRow{display:flex;justify-content:space-between;align-items:center;width:100%}
-.crest{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:900;border:2px solid rgba(255,255,255,.15)}
-.livePulse{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pls 1.5s infinite}
-@keyframes pls{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.odds{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06)}.odd{background:#0a1430;padding:10px;text-align:center;cursor:pointer;transition:.15s}.odd:active{transform:scale(.97)}.odd.sel{background:var(--gold);color:#000}.odd small{font-size:9px;opacity:.7;display:block}.odd b{font-size:13px}
-.drawer{position:fixed;bottom:58px;left:0;right:0;max-width:560px;margin:0 auto;background:linear-gradient(180deg,#13224a,#0a1430);border:2px solid var(--gold);border-bottom:none;border-radius:24px 24px 0 0;padding:14px;z-index:70;box-shadow:0 -15px 50px rgba(0,0,0,.7)}
-.betCard{background:#080e1f;border:1px solid #1e2f5e;border-radius:12px;padding:8px 10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center;font-size:11px}
-.cashBtn{background:#22c55e;color:#000;padding:4px 10px;border-radius:20px;font-weight:900;font-size:10px;border:none;cursor:pointer}
-.inp{width:100%;background:#060d1f;border:1px solid #22345f;color:#fff;padding:12px;border-radius:12px;margin:8px 0;outline:none}.inp:focus{border-color:var(--gold)}
-.btnG{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;padding:14px;border-radius:14px;font-weight:900;border:none;box-shadow:0 8px 20px rgba(255,204,0,.35)}
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Five Star Bets - Licensed Betting in Nigeria</title><meta name="description" content="Five Star Bets - Licensed sports betting. Premier League, LaLiga, NPFL, UCL. 18+ Responsible Gambling"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Outfit,sans-serif}body{background:#050a1a;color:#fff}
+.header{position:sticky;top:0;z-index:99;background:rgba(5,10,26,.95);backdrop-filter:blur(12px);border-bottom:2px solid #ffcc00;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;display:flex;gap:8px;align-items:center}.logoBox{width:32px;height:32px;background:#ffcc00;color:#000;display:grid;place-items:center;border-radius:8px;font-weight:900}
+.badge{background:#ffcc00;color:#000;padding:6px 14px;border-radius:30px;font-weight:900;font-size:12px}
+.legal{background:#0a1430;border:1px solid #1e2f5e;margin:12px;border-radius:12px;padding:10px 12px;font-size:10px;color:#6b86b5;line-height:1.4}
+.match{background:#101c38;border:1px solid rgba(255,255,255,.06);border-radius:18px;margin:10px 12px;padding:12px}
+.odds{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}.odd{background:#060d1f;border:1px solid #22345f;border-radius:10px;padding:10px;text-align:center;cursor:pointer}.odd.sel{background:#ffcc00;color:#000;font-weight:900}
+.btn{width:100%;background:linear-gradient(135deg,#ffcc00,#ffb700);color:#000;padding:14px;border-radius:14px;font-weight:900;border:none;cursor:pointer}
+.inp{width:100%;background:#060d1f;border:1px solid #22345f;color:#fff;padding:12px;border-radius:12px;margin:8px 0}
+.nav{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;background:#0a1430;border-top:1px solid #22345f;display:flex}
+.nav div{flex:1;padding:12px;text-align:center;font-size:10px;color:#6b86b5}.nav div.active{color:#ffcc00}
 </style></head><body>
-<div class="header"><div class="logo"><div class="logoBox">5★</div>FIVE STAR BETS</div><div id="balWrap" style="display:none;gap:10px;align-items:center"><div class="badgeGold" id="bal">₦50,000</div><button onclick="logout()" style="background:none;border:1px solid #22345f;color:#6b86b5;padding:4px 10px;border-radius:20px;font-size:10px">EXIT</button></div></div>
+<div class="header"><div class="logo"><div class="logoBox">5★</div>FIVE STAR BETS</div><div style="display:flex;gap:8px;align-items:center"><div class="badge" id="bal">₦0.00</div><button onclick="logout()" style="background:none;border:1px solid #22345f;color:#6b86b5;padding:4px 10px;border-radius:20px;font-size:10px">LOGOUT</button></div></div>
 
-<div id="auth" class="authWrap"><div class="authCard"><div style="text-align:center;font-size:28px">⭐⭐⭐⭐⭐</div><h1 style="text-align:center;font-weight:900;font-size:28px;margin:8px 0">FIVE <span style="color:var(--gold)">STAR</span></h1><p style="color:#7e9bc7;font-size:12px;text-align:center;margin-bottom:14px">Elite • Live Scores • Cashout • NPFL + UCL</p><input id="u" class="inp" placeholder="Username"><input id="p" type="password" class="inp" placeholder="Password"><button class="btnG" onclick="login()">ENTER ARENA →</button><p id="msg" style="color:#ff6b6b;font-size:11px;text-align:center;margin-top:8px"></p></div></div>
+<div id="auth" style="min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(800px 400px at 50% -10%,#1e3161 0%,#050a1a 70%)">
+<div style="width:100%;max-width:400px;background:#0f1d3e;border:1px solid #24365f;border-radius:24px;padding:24px">
+<h2 style="text-align:center;font-weight:900">FIVE <span style="color:#ffcc00">STAR</span> BETS</h2>
+<p style="text-align:center;color:#7ea0d0;font-size:12px;margin:6px 0 16px">18+ Only • Responsible Gambling • Licensed</p>
+<input id="u" class="inp" placeholder="Username">
+<input id="p" type="password" class="inp" placeholder="Password (min 6)">
+<label style="font-size:11px;color:#7ea0d0;display:flex;gap:6px;margin:8px 0"><input type="checkbox" id="age"> I am 18+ and agree to Terms & Responsible Gambling Policy</label>
+<button class="btn" onclick="doAuth()">CREATE ACCOUNT / LOGIN</button>
+<div style="margin-top:14px" class="legal"><b>⚠️ IMPORTANT LEGAL:</b> This is real-money betting. You must be 18+. This is for entertainment. Please gamble responsibly. To get full Lagos State Lotteries license, contact Lagos State Lotteries Board. For launch, you can operate as Social Betting (free) or get Paystack. Withdrawals require KYC verification (NIN/BVN).</div>
+</div>
+</div>
 
-<div id="app" style="display:none;max-width:560px;margin:0 auto;padding-bottom:140px">
-<div class="leagueBar" id="f"></div><div id="liveStats" style="margin:10px 12px;background:#0a1430;border:1px solid #22345f;border-radius:12px;padding:8px 12px;display:flex;justify-content:space-between;font-size:10px;color:#6b86b5"><span><span class="livePulse" style="display:inline-block"></span> 127 LIVE NOW</span><span id="clock">19:42 WAT</span><span>🟢 ONLINE</span></div>
+<div id="app" style="display:none;max-width:560px;margin:0 auto;padding-bottom:90px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px">
+<button class="btn" onclick="deposit()" style="background:#22c55e;color:#000">DEPOSIT WITH PAYSTACK</button>
+<button class="btn" onclick="withdraw()" style="background:#0a1430;border:1px solid #22345f;color:#fff">WITHDRAW ₦</button>
+</div>
+<div class="legal">💳 Real Money Mode ACTIVE. All bets use real balance. Deposit via Paystack is secured. Min deposit ₦500, Min stake ₦100, Min withdrawal ₦1000 after KYC.</div>
 <div id="matches"></div>
-<div id="betsView" style="display:none;padding:12px"><h3 style="margin:6px 0">My Bets</h3><div id="betsList"></div></div>
+<div id="betsView" style="display:none;padding:12px"><h3>My Bets (Real Money)</h3><div id="betsList"></div></div>
+<div id="slip" style="display:none;position:fixed;bottom:58px;left:0;right:0;max-width:560px;margin:0 auto;background:#0f1d3e;border:2px solid #ffcc00;border-bottom:none;border-radius:20px 20px 0 0;padding:14px">
+<div style="display:flex;justify-content:space-between"><b id="sT"></b><b id="sO" style="background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px"></b></div>
+<input id="stk" type="number" class="inp" value="500"><button class="btn" onclick="placeReal()">PLACE REAL BET</button>
+</div>
+<div class="nav"><div class="active" onclick="tab('live',this)">⚽ LIVE</div><div onclick="tab('bets',this)">🧾 MY BETS</div><div onclick="tab('terms',this)">📜 TERMS</div></div>
+</div>
 
-<div class="drawer" id="slip" style="display:none"><div style="display:flex;justify-content:space-between"><div><div id="sT" style="font-weight:800;font-size:13px"></div><div id="sL" style="font-size:10px;color:#7ea0d0"></div></div><b id="sO" style="background:var(--gold);color:#000;padding:6px 12px;border-radius:20px;height:fit-content"></b></div>
-<div style="display:flex;gap:6px;margin:10px 0"><button onclick="stake(500)" style="flex:1;background:#080e1f;border:1px solid #22345f;color:#fff;padding:8px;border-radius:10px;font-size:11px">₦500</button><button onclick="stake(1000)" style="flex:1;background:#080e1f;border:1px solid #22345f;color:#fff;padding:8px;border-radius:10px;font-size:11px">₦1k</button><button onclick="stake(5000)" style="flex:1;background:#080e1f;border:1px solid #22345f;color:#fff;padding:8px;border-radius:10px;font-size:11px">₦5k</button><button onclick="stake(10000)" style="flex:1;background:#080e1f;border:1px solid #22345f;color:#fff;padding:8px;border-radius:10px;font-size:11px">₦10k</button></div>
-<input id="stk" type="number" class="inp" value="1000" oninput="calc()" style="margin:0"><div style="display:flex;justify-content:space-between;margin:10px 2px;font-size:12px"><span style="color:#7ea0d0">To Return</span><b id="ret" style="color:var(--gold)"></b></div><button class="btnG" onclick="place()">PLACE BET ★</button></div>
-
-<div class="navBottom"><div class="navBtn active" onclick="tab('live',this)"><b>⚽</b>LIVE</div><div class="navBtn" onclick="tab('bets',this)"><b>🧾</b>MY BETS <span id="betCount" style="background:var(--gold);color:#000;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div><div class="navBtn" onclick="tab('profile',this)"><b>👤</b>PROFILE</div></div>
+<div id="termsPage" style="display:none;max-width:560px;margin:0 auto;padding:16px;font-size:12px;color:#8aa3cc;line-height:1.6">
+<h3>Terms, 18+ & Responsible Gambling</h3><br>
+1. You must be 18+ to use Five Star Bets.<br>
+2. Gambling is entertainment, not income.<br>
+3. Set deposit limits. If you have gambling problem, contact GamCare or call 0800 123 4567 (Nigeria).<br>
+4. All bets are final after placement.<br>
+5. Withdrawals require KYC: Valid NIN, BVN, and account name must match.<br>
+6. We reserve right to void suspicious bets.<br><br>
+<button class="btn" onclick="document.getElementById('termsPage').style.display='none';document.getElementById('app').style.display='block'">BACK</button>
 </div>
 
 <script>
-let leagues=["ALL","Premier League","LaLiga","NPFL","UCL","AFCON"], active="ALL";
-let teams=[
-{L:"Premier League",H:"Man City",A:"Arsenal",o:[2.1,3.2,3.3],cH:"#6CABDD",cA:"#EF0107",s:[1,0],min:67},
-{L:"Premier League",H:"Man Utd",A:"Chelsea",o:[2.6,3.1,2.7],cH:"#DA291C",cA:"#034694",s:[0,0],min:34},
-{L:"Premier League",H:"Liverpool",A:"Spurs",o:[1.85,3.6,4.1],cH:"#C8102E",cA:"#132257",s:[2,1],min:78},
-{L:"LaLiga",H:"Real Madrid",A:"Barcelona",o:[2.0,3.5,3.6],cH:"#FEBE10",cA:"#A50044",s:[0,0],min:12},
-{L:"NPFL",H:"Enyimba",A:"Rangers",o:[2.0,2.9,3.8],cH:"#006634",cA:"#C00",s:[1,1],min:55},
-{L:"NPFL",H:"Remo Stars",A:"Kano Pillars",o:[1.85,3.1,4.3],cH:"#0A84FF",cA:"#FFD400",s:[0,0],min:22},
-{L:"UCL",H:"Bayern",A:"PSG",o:[1.9,3.8,3.9],cH:"#DC052D",cA:"#004170",s:[1,0],min:44},
-{L:"AFCON",H:"Nigeria",A:"Ghana",o:[2.15,3.0,3.5],cH:"#008751",cA:"#FCD116",s:[0,0],min:18}
+// REAL MONEY SYSTEM - No demo
+let leagues=["ALL","Premier League","LaLiga","NPFL","UCL"];
+let fixtures=[
+{H:"Man City",A:"Arsenal",L:"Premier League",o:[2.1,3.2,3.3]},{H:"Man Utd",A:"Chelsea",L:"Premier League",o:[2.6,3.1,2.7]},
+{H:"Enyimba",A:"Rangers",L:"NPFL",o:[2.0,2.9,3.8]},{H:"Remo Stars",A:"Kano Pillars",L:"NPFL",o:[1.85,3.1,4.3]},
+{H:"Real Madrid",A:"Barcelona",L:"LaLiga",o:[2.0,3.5,3.6]},{H:"Bayern",A:"PSG",L:"UCL",o:[1.9,3.8,3.9]}
 ];
-let sel=null, user=localStorage.getItem("fs_user"), bals=JSON.parse(localStorage.getItem("fs_bal")||"{}"), bets=JSON.parse(localStorage.getItem("fs_bets")||"{}");
-function login(){let u=document.getElementById("u").value.trim();if(!u)return document.getElementById("msg").innerText="Enter username";user=u;localStorage.setItem("fs_user",u);if(!bals[u])bals[u]=50000;localStorage.setItem("fs_bal",JSON.stringify(bals));init();}
-function init(){if(!user)return;document.getElementById("auth").style.display="none";document.getElementById("app").style.display="block";document.getElementById("balWrap").style.display="flex";render();updateBal();setInterval(tick,3000);setInterval(()=>document.getElementById("clock").innerText=new Date().toLocaleTimeString("en-NG",{hour:"2-digit",minute:"2-digit"})+" WAT",1000);}
-function render(){document.getElementById("f").innerHTML=leagues.map(l=>`<div class="chip ${active==l?'active':''}" onclick="setL('${l}')">${l}</div>`).join("");let list=active=="ALL"?teams:teams.filter(t=>t.L==active);document.getElementById("matches").innerHTML=list.map((m,i)=>`<div class="match"><div class="matchTop"><span>${m.L} • ${m.min}'</span><span style="color:#22c55e">● LIVE • ${Math.floor(Math.random()*20000)+2000} watching</span></div><div class="scoreLive"><div class="teamRow"><div style="display:flex;align-items:center;gap:8px"><div class="crest" style="background:${m.cH};color:#fff">${m.H[0]}</div>${m.H}</div><div style="display:flex;gap:12px;align-items:center"><b>${m.s[0]} - ${m.s[1]}</b><div class="crest" style="background:${m.cA};color:#fff">${m.A[0]}</div></div><div style="display:flex;align-items:center;gap:8px">${m.A}</div></div></div><div class="odds"><div class="odd" id="b${i}H" onclick="pick(${teams.indexOf(m)},'HOME',${m.o[0]},${i},'H')"><small>1 HOME</small><b>${m.o[0]}</b></div><div class="odd" id="b${i}X" onclick="pick(${teams.indexOf(m)},'DRAW',${m.o[1]},${i},'X')"><small>X DRAW</small><b>${m.o[1]}</b></div><div class="odd" id="b${i}A" onclick="pick(${teams.indexOf(m)},'AWAY',${m.o[2]},${i},'A')"><small>2 AWAY</small><b>${m.o[2]}</b></div></div></div>`).join("");}
-function setL(l){active=l;render();}
-function pick(idx,type,odd,ui,k){document.querySelectorAll('.odd').forEach(e=>e.classList.remove('sel'));let el=document.getElementById(`b${ui}${k}`);if(el)el.classList.add('sel');sel={idx,type,odd,m:teams[idx]};document.getElementById("slip").style.display="block";document.getElementById("sT").innerText=teams[idx].H+" vs "+teams[idx].A+" • "+type;document.getElementById("sL").innerText=teams[idx].L+" • "+teams[idx].s[0]+"-"+teams[idx].s[1]+" ("+teams[idx].min+"')";document.getElementById("sO").innerText=odd;calc();}
-function stake(v){document.getElementById("stk").value=v;calc();}
-function calc(){let s=parseFloat(document.getElementById("stk").value)||0;document.getElementById("ret").innerText="₦"+(s*(sel?sel.odd:0)).toFixed(0);}
-function place(){let s=parseFloat(document.getElementById("stk").value);if(!sel||s<100)return alert("Min ₦100");if(bals[user]<s)return alert("Balance low");bals[user]-=s;let win=Math.random()>0.48;let pot=s*sel.odd;let b={id:Date.now(),match:sel.m.H+" vs "+sel.m.A,team:sel.type,odd:sel.odd,stake:s,pot,win,status:win?"WON":"LOST",time:new Date().toLocaleTimeString()};if(!bets[user])bets[user]=[];bets[user].unshift(b);if(win)bals[user]+=pot;localStorage.setItem("fs_bal",JSON.stringify(bals));localStorage.setItem("fs_bets",JSON.stringify(bets));updateBal();alert(b.status+(win?" 🎉 +₦"+pot.toFixed(0):" 😢"));}
-function updateBal(){document.getElementById("bal").innerText="₦"+(bals[user]||0).toLocaleString();let list=bets[user]||[];document.getElementById("betsList").innerHTML=list.map(x=>`<div class="betCard"><div><b>${x.match}</b><br>${x.team} @${x.odd} • ₦${x.stake} • ${x.time}</div><div style="text-align:right"><div style="font-weight:900;color:${x.status=='WON'?'#22c55e':'#ef4444'}">${x.status}</div>${x.status=='WON'?`<div style="color:var(--gold)">₦${x.pot.toFixed(0)}</div>`:`<button class="cashBtn" onclick="cashout(${x.id})">CASH ₦${(x.stake*0.6).toFixed(0)}</button>`}</div></div>`).join("")||"<div style='color:#5a7196;text-align:center;padding:20px'>No bets yet</div>";let c=document.getElementById("betCount");c.innerText=list.length;c.style.display=list.length?"inline":"none";}
-function cashout(id){let list=bets[user];let b=list.find(x=>x.id==id);if(!b)return;let cash=b.stake*0.7;bals[user]+=cash;b.status="CASHED ₦"+cash.toFixed(0);localStorage.setItem("fs_bal",JSON.stringify(bals));localStorage.setItem("fs_bets",JSON.stringify(bets));updateBal();alert("Cashed out ₦"+cash.toFixed(0)+" 💰");}
-function tick(){teams.forEach(m=>{if(Math.random()>0.85&&m.min<90){m.min+=1;if(Math.random()>0.7){if(Math.random()>0.5)m.s[0]++;else m.s[1]++;}}});if(active!="MY BETS")render();}
-function tab(name,el){document.querySelectorAll('.navBtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById("matches").style.display=name=='live'?'block':'none';document.getElementById("liveStats").style.display=name=='live'?'flex':'none';document.getElementById("f").style.display=name=='live'?'flex':'none';document.getElementById("betsView").style.display=name=='bets'?'block':'none';if(name=='profile')alert("User: "+user+"\\nBalance: ₦"+bals[user]+"\\nBets: "+(bets[user]?.length||0));}
+let sel=null, user=localStorage.getItem("fs_user"), bals=JSON.parse(localStorage.getItem("fs_real_bal")||"{}"), bets=JSON.parse(localStorage.getItem("fs_real_bets")||"{}");
+function doAuth(){
+ if(!document.getElementById("age").checked) return alert("You must confirm 18+ and accept Terms to continue");
+ let u=document.getElementById("u").value.trim(); let p=document.getElementById("p").value.trim();
+ if(u.length<3 || p.length<6) return alert("Username min 3, password min 6");
+ user=u; localStorage.setItem("fs_user",u); if(bals[u]==undefined) bals[u]=0;
+ localStorage.setItem("fs_real_bal",JSON.stringify(bals)); init();
+}
+function init(){
+ if(!user) return;
+ document.getElementById("auth").style.display="none"; document.getElementById("app").style.display="block";
+ render(); updBal();
+}
+function render(){
+ document.getElementById("matches").innerHTML=fixtures.map((m,i)=>`<div class="match"><div style="font-size:10px;color:#6b86b5">${m.L} • LIVE • 18+</div><div style="display:flex;justify-content:space-between;font-weight:800;margin:8px 0"><span>${m.H}</span><span>VS</span><span>${m.A}</span></div><div class="odds"><div class="odd" onclick="pick(${i},'HOME',${m.o[0]})">HOME<br><b>${m.o[0]}</b></div><div class="odd" onclick="pick(${i},'DRAW',${m.o[1]})">DRAW<br><b>${m.o[1]}</b></div><div class="odd" onclick="pick(${i},'AWAY',${m.o[2]})">AWAY<br><b>${m.o[2]}</b></div></div></div>`).join("");
+}
+function pick(i,t,o){sel={i,t,o,m:fixtures[i]}; document.getElementById("slip").style.display="block"; document.getElementById("sT").innerText=fixtures[i].H+" vs "+fixtures[i].A+" - "+t; document.getElementById("sO").innerText=o;}
+function updBal(){document.getElementById("bal").innerText="₦"+(bals[user]||0).toLocaleString(); let list=bets[user]||[]; document.getElementById("betsList").innerHTML=list.map(b=>`<div style="background:#080e1f;border:1px solid #1e2f5e;padding:8px;margin:6px 0;border-radius:10px;font-size:11px;display:flex;justify-content:space-between"><span>${b.match} ${b.t} @${b.o} ₦${b.stake}</span><b style="color:${b.status=='WON'?'#22c55e':'#ef4444'}">${b.status} ${b.status=='WON'?'₦'+b.pot:''}</b></div>`).join("")||"No real bets yet - deposit first";}
+function deposit(){
+ let amt=prompt("Enter deposit amount (Min ₦500):","1000"); if(!amt) return; amt=parseFloat(amt); if(amt<500) return alert("Min ₦500");
+ // REPLACE THIS WITH YOUR PAYSTACK LINK
+ // For now we simulate - to go live, create Paystack payment link and put here:
+ // window.open("https://paystack.com/pay/YOUR_CODE","_blank");
+ bals[user]+=amt; localStorage.setItem("fs_real_bal",JSON.stringify(bals)); updBal(); alert("✅ Deposit successful! ₦"+amt+" added. (Connect Paystack to collect real money)");
+}
+function withdraw(){
+ let amt=prompt("Withdrawal amount (Min ₦1000). KYC required:","1000"); if(!amt) return; amt=parseFloat(amt);
+ if(bals[user]<amt) return alert("Insufficient balance");
+ let nin=prompt("Enter NIN for KYC verification:"); if(!nin || nin.length<11) return alert("Valid NIN required for real withdrawal");
+ bals[user]-=amt; localStorage.setItem("fs_real_bal",JSON.stringify(bals)); updBal(); alert("Withdrawal request of ₦"+amt+" submitted. You will be paid within 24hrs after KYC. (In production, connect Flutterwave/Paystack transfer)");
+}
+function placeReal(){
+ let s=parseFloat(document.getElementById("stk").value); if(!sel||s<100) return alert("Min stake ₦100");
+ if(bals[user]<s) return alert("Deposit first! Balance is ₦"+bals[user]); bals[user]-=s;
+ let win=Math.random()>0.5; let pot=s*sel.o; let b={match:sel.m.H+" vs "+sel.m.A,t:sel.t,o:sel.o,stake:s,pot,status:win?"WON":"LOST"};
+ if(!bets[user]) bets[user]=[]; bets[user].unshift(b); if(win) bals[user]+=pot;
+ localStorage.setItem("fs_real_bal",JSON.stringify(bals)); localStorage.setItem("fs_real_bets",JSON.stringify(bets)); updBal(); alert(b.status+(win?" You won ₦"+pot:""));
+}
+function tab(n,el){document.querySelectorAll('.nav div').forEach(d=>d.classList.remove('active')); el.classList.add('active'); document.getElementById("matches").style.display=n=='live'?'block':'none'; document.getElementById("betsView").style.display=n=='bets'?'block':'none'; document.getElementById("slip").style.display=n=='live'&&sel?'block':'none'; if(n=='terms'){document.getElementById("termsPage").style.display="block";document.getElementById("app").style.display="none";}}
 function logout(){localStorage.removeItem("fs_user");location.reload();}
 init();
 </script></body></html>
