@@ -1,145 +1,192 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Five Star Bets</title>
+<title>Five Star Bets - Live & Casino</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, sans-serif}
-body{background:#eef0f3}
-.top{background:#00a826; color:white; padding:12px 15px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10}
-.logo{font-weight:900; font-size:20px}
-.top-right{display:flex; gap:10px; align-items:center}
-.bal{background:rgba(0,0,0,0.25); padding:6px 14px; border-radius:20px; font-weight:bold; font-size:14px}
-.btn-dep{background:#ffcc00; color:#000; border:none; padding:7px 16px; border-radius:5px; font-weight:900; cursor:pointer}
-.nav{background:white; display:flex; overflow-x:auto; border-bottom:1px solid #ddd}
-.nav div{padding:13px 18px; font-weight:700; font-size:13px; white-space:nowrap; color:#666; border-bottom:3px solid transparent}
-.nav div.active{color:#00a826; border-bottom:3px solid #00a826}
-.banner{background:linear-gradient(90deg, #00a826, #00d231); color:white; margin:10px; border-radius:8px; padding:16px; display:flex; justify-content:space-between; align-items:center}
-.banner button{background:white; color:#00a826; border:none; padding:8px 16px; border-radius:5px; font-weight:900}
-.matches{background:white; margin:10px; border-radius:8px; overflow:hidden}
-.match-header{background:#f5f5f5; padding:10px 15px; font-weight:700; font-size:12px; display:flex; justify-content:space-between; color:#666}
-.match{padding:14px 15px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center}
-.teams{font-size:13px; font-weight:600; width:45%}
+*{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system,sans-serif}
+body{background:#0e0e0e; color:white}
+.top{background:#00a826; padding:12px 15px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:20}
+.bal{background:rgba(0,0,0,0.3); padding:6px 14px; border-radius:20px; font-weight:bold}
+.btn-dep{background:#ffcc00; border:none; padding:7px 16px; border-radius:5px; font-weight:900; cursor:pointer}
+.nav{background:#1a1a1a; display:flex; overflow-x:auto; gap:2px; border-bottom:1px solid #333}
+.nav div{padding:14px 20px; font-weight:700; font-size:13px; white-space:nowrap; cursor:pointer; color:#999}
+.nav div.active{color:#00ff88; border-bottom:3px solid #00ff88; background:#222}
+.section{padding:10px}
+.card{background:#1e1e1e; border-radius:10px; margin-bottom:10px; overflow:hidden; border:1px solid #2a2a2a}
+.card-header{padding:10px 15px; background:#252525; font-weight:700; font-size:12px; display:flex; justify-content:space-between; color:#aaa}
+.match{padding:12px 15px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #2a2a2a}
+.teams{font-size:13px; font-weight:600; width:50%}
+.live-dot{background:red; width:8px; height:8px; border-radius:50%; display:inline-block; animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
 .odds{display:flex; gap:6px}
-.odd{background:#f0f0f0; padding:7px 13px; border-radius:4px; font-size:12px; font-weight:800; cursor:pointer; min-width:48px; text-align:center}
+.odd{background:#2c2c2c; padding:8px 12px; border-radius:5px; font-weight:800; cursor:pointer; min-width:50px; text-align:center; border:1px solid #333}
 .odd.active{background:#00a826; color:white}
-.betslip{position:fixed; bottom:0; left:0; right:0; background:#121212; color:white; padding:13px 15px; display:flex; justify-content:space-between; align-items:center; border-radius:12px 12px 0 0}
-.betslip button{background:#00ff88; color:#000; border:none; padding:10px 25px; border-radius:6px; font-weight:900}
+.casino-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.game{height:130px; border-radius:12px; display:flex; flex-direction:column; justify-content:end; padding:12px; font-weight:900; cursor:pointer; position:relative; overflow:hidden}
+.game span{position:relative; z-index:2}
+.aviator{background:linear-gradient(135deg,#ff003c,#ff8a00)}
+.slots{background:linear-gradient(135deg,#7000ff,#ff00c8)}
+.roulette{background:linear-gradient(135deg,#00c6ff,#0072ff)}
+.crash{background:linear-gradient(135deg,#00ff88,#00a826)}
+.betslip{position:fixed; bottom:0; left:0; right:0; background:#121212; border-top:1px solid #333; padding:13px 15px; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0}
+.betslip button{background:#00ff88; border:none; padding:11px 28px; border-radius:8px; font-weight:900}
+.loading{padding:30px; text-align:center; color:#777}
 </style>
 </head>
 <body>
 
 <div class="top">
-  <div class="logo">⭐ FIVE STAR BETS</div>
-  <div class="top-right">
+  <div style="font-weight:900">⭐ FIVE STAR BETS</div>
+  <div style="display:flex; gap:10px; align-items:center">
     <div class="bal">₦<span id="bal">0</span></div>
     <button class="btn-dep" onclick="deposit()">DEPOSIT</button>
   </div>
 </div>
 
 <div class="nav">
-  <div class="active">⚽ Football</div>
-  <div>🔴 Live</div>
-  <div>🎮 Virtuals</div>
-  <div>🎰 Casino</div>
-  <div>🏀 Basketball</div>
+  <div class="active" onclick="showTab('football', this)">⚽ Football</div>
+  <div onclick="showTab('live', this)">🔴 Live</div>
+  <div onclick="showTab('virtual', this)">🎮 Virtuals</div>
+  <div onclick="showTab('casino', this)">🎰 Casino</div>
 </div>
 
-<div class="banner">
-  <div><h3>300% Welcome Bonus!</h3><p style="font-size:12px">Deposit now & get bonus</p></div>
-  <button onclick="deposit()">CLAIM NOW</button>
+<!-- FOOTBALL -->
+<div id="football" class="section">
+  <div id="footballMatches" class="card"><div class="loading">Loading real matches...</div></div>
 </div>
 
-<div class="matches">
-  <div class="match-header"><span>Today • Premier League</span><span>1 &nbsp; X &nbsp; 2</span></div>
-  <div class="match">
-    <div class="teams">Arsenal<br><small style="color:#888">vs Chelsea - 19:45</small><br>Chelsea</div>
-    <div class="odds">
-      <div class="odd" onclick="addBet(this)">2.45</div>
-      <div class="odd" onclick="addBet(this)">3.20</div>
-      <div class="odd" onclick="addBet(this)">2.85</div>
-    </div>
-  </div>
-  <div class="match">
-    <div class="teams">Man City<br><small style="color:#888">vs Liverpool - 21:00</small><br>Liverpool</div>
-    <div class="odds">
-      <div class="odd" onclick="addBet(this)">1.95</div>
-      <div class="odd" onclick="addBet(this)">3.50</div>
-      <div class="odd" onclick="addBet(this)">3.80</div>
-    </div>
-  </div>
-  <div class="match">
-    <div class="teams">Barcelona<br><small style="color:#888">vs Real Madrid - 20:00</small><br>Real Madrid</div>
-    <div class="odds">
-      <div class="odd" onclick="addBet(this)">2.10</div>
-      <div class="odd" onclick="addBet(this)">3.30</div>
-      <div class="odd" onclick="addBet(this)">3.10</div>
-    </div>
+<!-- LIVE -->
+<div id="live" class="section" style="display:none">
+  <div id="liveMatches" class="card"><div class="loading">Loading live scores...</div></div>
+</div>
+
+<!-- VIRTUALS -->
+<div id="virtual" class="section" style="display:none">
+  <div class="card">
+    <div class="card-header">Virtual Football League</div>
+    <div class="match"><div class="teams"><span class="live-dot"></span> Real Madrid vs Barca<br><small style="color:#00ff88">Virtual • 2:30</small></div><div class="odds"><div class="odd" onclick="addBet(this)">2.10</div><div class="odd" onclick="addBet(this)">3.30</div><div class="odd" onclick="addBet(this)">2.90</div></div></div>
+    <div class="match"><div class="teams"><span class="live-dot"></span> Man City vs Arsenal<br><small style="color:#00ff88">Virtual • 1:15</small></div><div class="odds"><div class="odd" onclick="addBet(this)">1.85</div><div class="odd" onclick="addBet(this)">3.80</div><div class="odd" onclick="addBet(this)">3.20</div></div></div>
   </div>
 </div>
 
-<div style="height:90px"></div>
+<!-- CASINO -->
+<div id="casino" class="section" style="display:none">
+  <h3 style="margin-bottom:10px">🔥 Hot Casino Games</h3>
+  <div class="casino-grid">
+    <div class="game aviator" onclick="playAviator()"><span>✈️ AVIATOR<br><small>Win up to 1000x</small></span></div>
+    <div class="game crash" onclick="playCrash()"><span>🚀 CRASH<br><small>Crash Game</small></span></div>
+    <div class="game slots" onclick="playSlots()"><span>🎰 SLOTS<br><small>Jackpot Slots</small></span></div>
+    <div class="game roulette" onclick="playRoulette()"><span>🎡 ROULETTE<br><small>Live Roulette</small></span></div>
+  </div>
+  <div id="casinoResult" style="margin-top:15px; background:#1e1e1e; padding:15px; border-radius:10px; display:none"></div>
+</div>
 
+<div style="height:100px"></div>
 <div class="betslip">
-  <div><span id="betCount">0</span> Selections | Odds: <span id="totalOdds">0.00</span></div>
+  <div><span id="betCount">0</span> Bets • Odds: <span id="totalOdds">0.00</span> • Win: ₦<span id="win">0</span></div>
   <button onclick="placeBet()">BET NOW</button>
 </div>
 
 <script>
-// BALANCE
 let bal = localStorage.getItem('five_star_balance') || 0;
 document.getElementById('bal').innerText = bal;
-let betCount = 0;
-let totalOdds = 1;
+let betCount=0, totalOdds=1, stake=100;
 
-// FIXED DEPOSIT - 100% WORKING
+// DEPOSIT - YOUR NEW LINK
 function deposit(){
-  // This goes straight to your Paystack - no popup blocker
-  window.location.href = "https://paystack.shop/pay/mmbwjiunsi";
+  window.location.href = "https://paystack.shop/pay/mmdzajumi";
 }
 
+// TABS
+function showTab(id, el){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.nav div').forEach(d=>d.classList.remove('active'));
+  el.classList.add('active');
+  if(id=='live') loadLive();
+}
+
+// REAL FOOTBALL - Using ESPN FREE API
+async function loadFootball(){
+  try{
+    let res = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+    let data = await res.json();
+    let html = '<div class="card-header"><span>🏴󐁧󐁢󐁥󐁮󐁧󐁿 Premier League - TODAY</span><span>1 X 2</span></div>';
+    data.events.slice(0,8).forEach(ev=>{
+      let home = ev.competitions[0].competitors[0].team.shortDisplayName;
+      let away = ev.competitions[0].competitors[1].team.shortDisplayName;
+      let time = ev.status.displayClock || ev.date.slice(11,16);
+      html+=`<div class="match"><div class="teams">${home}<br><small style="color:#888">vs ${away} - ${time}</small><br>${away}</div><div class="odds"><div class="odd" onclick="addBet(this)">${(1.8+Math.random()).toFixed(2)}</div><div class="odd" onclick="addBet(this)">${(3.0+Math.random()).toFixed(2)}</div><div class="odd" onclick="addBet(this)">${(2.5+Math.random()).toFixed(2)}</div></div></div>`;
+    });
+    document.getElementById('footballMatches').innerHTML = html;
+  }catch(e){
+    // Fallback if API fails
+    document.getElementById('footballMatches').innerHTML = `
+    <div class="card-header"><span>Today Matches</span><span>1 X 2</span></div>
+    <div class="match"><div class="teams">Arsenal<br><small>vs Chelsea - 19:45</small><br>Chelsea</div><div class="odds"><div class="odd" onclick="addBet(this)">2.45</div><div class="odd" onclick="addBet(this)">3.20</div><div class="odd" onclick="addBet(this)">2.85</div></div></div>
+    <div class="match"><div class="teams">Man City<br><small>vs Liverpool - 21:00</small><br>Liverpool</div><div class="odds"><div class="odd" onclick="addBet(this)">1.95</div><div class="odd" onclick="addBet(this)">3.50</div><div class="odd" onclick="addBet(this)">3.80</div></div></div>
+    <div class="match"><div class="teams">Barcelona<br><small>vs Real Madrid - 20:00</small><br>Real Madrid</div><div class="odds"><div class="odd" onclick="addBet(this)">2.10</div><div class="odd" onclick="addBet(this)">3.30</div><div class="odd" onclick="addBet(this)">3.10</div></div></div>`;
+  }
+}
+
+async function loadLive(){
+  try{
+    let res = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+    let data = await res.json();
+    let html = '<div class="card-header"><span><span class="live-dot"></span> LIVE NOW</span><span>SCORE</span></div>';
+    data.events.slice(0,5).forEach(ev=>{
+      let home = ev.competitions[0].competitors[0].team.shortDisplayName;
+      let away = ev.competitions[0].competitors[1].team.shortDisplayName;
+      let score = ev.competitions[0].competitors[0].score + " - " + ev.competitions[0].competitors[1].score;
+      html+=`<div class="match"><div class="teams"><span class="live-dot"></span> ${home} vs ${away}<br><small style="color:#ff4444">LIVE ${ev.status.displayClock || '45:00'}</small></div><div style="font-weight:900; color:#00ff88">${score}</div><div class="odds"><div class="odd" onclick="addBet(this)">1.90</div><div class="odd" onclick="addBet(this)">2.10</div></div></div>`;
+    });
+    document.getElementById('liveMatches').innerHTML = html;
+  }catch(e){
+    document.getElementById('liveMatches').innerHTML = '<div class="loading">Live matches loading...</div>';
+  }
+}
+
+loadFootball();
+
+// BET LOGIC
 function addBet(el){
   el.classList.toggle('active');
-  if(el.classList.contains('active')){
-    betCount++;
-    totalOdds = (parseFloat(totalOdds) * parseFloat(el.innerText)).toFixed(2);
-  } else {
-    betCount--;
-    totalOdds = (parseFloat(totalOdds) / parseFloat(el.innerText)).toFixed(2);
-    if(betCount==0) totalOdds = 1;
-  }
-  document.getElementById('betCount').innerText = betCount;
-  document.getElementById('totalOdds').innerText = betCount==0 ? "0.00" : totalOdds;
+  if(el.classList.contains('active')){ betCount++; totalOdds = (parseFloat(totalOdds)*parseFloat(el.innerText)).toFixed(2); }
+  else { betCount--; totalOdds = (parseFloat(totalOdds)/parseFloat(el.innerText)).toFixed(2); if(betCount==0) totalOdds=1; }
+  document.getElementById('betCount').innerText=betCount;
+  document.getElementById('totalOdds').innerText=betCount==0?"0.00":totalOdds;
+  document.getElementById('win').innerText=(100*totalOdds).toFixed(0);
 }
-
 function placeBet(){
-  if(betCount==0){ alert("Select odds first!"); return; }
-  let stake = prompt("Enter stake amount, Balance: ₦"+bal, "100");
-  if(!stake) return;
-  if(parseFloat(stake) > parseFloat(bal)){ 
-    alert("Insufficient balance! Please DEPOSIT first!");
-    deposit();
-    return; 
-  }
-  let win = (parseFloat(stake) * parseFloat(totalOdds)).toFixed(2);
-  if(confirm("Place bet of ₦"+stake+" to win ₦"+win+"?")){
-    let newBal = parseFloat(bal) - parseFloat(stake);
-    localStorage.setItem('five_star_balance', newBal);
-    alert("Bet placed! Potential win: ₦"+win);
+  if(betCount==0){ alert("Select odds!"); return; }
+  let s = prompt("Stake amount? Balance: ₦"+bal, "100");
+  if(!s || parseFloat(s)>parseFloat(bal)){ alert("Low balance! Deposit!"); deposit(); return; }
+  let win=(s*totalOdds).toFixed(2);
+  if(confirm(`Bet ₦${s} to win ₦${win}?`)){
+    localStorage.setItem('five_star_balance', parseFloat(bal)-parseFloat(s));
+    alert("Bet placed! Win: ₦"+win);
     location.reload();
   }
 }
 
-// Handle return from Paystack - add balance manually after payment
-let params = new URLSearchParams(window.location.search);
-if(params.get('paid') == 'true'){
-  let last = prompt("Enter amount you paid on Paystack to add to balance:", "1000");
-  if(last){
-    let newBal = parseFloat(localStorage.getItem('five_star_balance')||0) + parseFloat(last);
-    localStorage.setItem('five_star_balance', newBal);
-    alert("₦"+last+" added! New balance: ₦"+newBal);
-    window.location.href = window.location.pathname;
-  }
+// CASINO GAMES
+function playAviator(){
+  let box = document.getElementById('casinoResult'); box.style.display='block';
+  let mult = 1.00; box.innerHTML=`✈️ Aviator flying... <h1 id="mult" style="color:#00ff88">1.00x</h1><button id="cash" onclick="cashout()" style="background:#00ff88; border:none; padding:10px 20px; border-radius:8px; font-weight:900; margin-top:10px">CASH OUT</button>`;
+  let int = setInterval(()=>{ mult+=0.08; document.getElementById('mult').innerText=mult.toFixed(2)+'x'; if(Math.random()<0.08){ clearInterval(int); box.innerHTML+=`<p style="color:red; margin-top:10px">💥 Crashed at ${mult.toFixed(2)}x</p>`; } },150);
+  window.crashInt=int; window.curMult=()=>mult;
+}
+function cashout(){ clearInterval(window.crashInt); let m=window.curMult(); let win=(100*m).toFixed(0); alert(`You cashed out at ${m.toFixed(2)}x! Win ₦${win}`); let nb=parseFloat(bal)+parseFloat(win); localStorage.setItem('five_star_balance', nb); location.reload(); }
+function playSlots(){ let s=['🍒','🍋','🔔','⭐','💎']; let r=[s[Math.floor(Math.random()*5)],s[Math.floor(Math.random()*5)],s[Math.floor(Math.random()*5)]]; let box=document.getElementById('casinoResult'); box.style.display='block'; box.innerHTML=`<h2>${r.join(' | ')}</h2>`+(r[0]==r[1]&&r[1]==r[2]?`<p style="color:#00ff88">JACKPOT! You win ₦500!</p>`: `<p>Try again!</p>`); if(r[0]==r[1]&&r[1]==r[2]){ localStorage.setItem('five_star_balance', parseFloat(bal)+500); setTimeout(()=>location.reload(),1500); } }
+function playCrash(){ playAviator(); }
+function playRoulette(){ let n=Math.floor(Math.random()*37); let col=n==0?'GREEN':n%2==0?'BLACK':'RED'; let box=document.getElementById('casinoResult'); box.style.display='block'; box.innerHTML=`<h1 style="font-size:50px">${n}</h1><p>${col}</p><button onclick="playRoulette()" style="background:#fff; color:#000; border:none; padding:8px 15px; border-radius:6px; margin-top:10px">SPIN AGAIN</button>`; }
+
+// Auto add balance after paystack
+let p = new URLSearchParams(window.location.search);
+if(p.get('paid')=='true' || window.location.href.includes('paystack')){
+  let amt = prompt("Enter amount you paid to add to balance:","20000");
+  if(amt){ localStorage.setItem('five_star_balance', parseFloat(localStorage.getItem('five_star_balance')||0)+parseFloat(amt)); alert("Added!"); window.location.href=window.location.pathname; }
 }
 </script>
 </body>
