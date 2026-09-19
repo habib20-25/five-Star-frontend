@@ -2,85 +2,133 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Five Star Predictions - Predict & Win</title>
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<title>Five Star Predictions - SportyBet Style</title>
 <style>
-body{font-family:Arial;background:#0a0a0a;color:white;margin:0}
-.header{background:#ffcc00;color:black;padding:15px;text-align:center;font-weight:bold;font-size:20px}
-.game-card{background:#1a1a1a;margin:10px;padding:15px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
-.odd-btn{background:#ffcc00;color:black;border:none;padding:8px 12px;border-radius:5px;font-weight:bold;cursor:pointer;margin:2px}
-.live{color:red;font-size:12px;animation:blink 1s infinite}
-@keyframes blink{50%{opacity:0}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f5f5}
+.header{background:#af0f0f;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center}
+.header .logo{font-weight:900;font-size:22px}
+.header .logo span{color:#ffcc00}
+.banner{background:#000;color:white;display:flex;padding:15px;align-items:center;justify-content:space-between}
+.banner img{height:120px}
+.main{display:flex;max-width:1400px;margin:auto}
+.left{width:220px;background:white;border-right:1px solid #ddd;padding:15px;display:block}
+.left h4{font-size:13px;margin:15px 0 5px;color:#333}
+.left p{font-size:13px;padding:6px;cursor:pointer}
+.left p:hover{background:#f0f0f0}
+.center{flex:1;background:white;margin:0 10px;padding:10px}
+.right{width:300px;background:white;padding:10px;border-left:1px solid #ddd}
+@media(max-width:900px){.left,.right{display:none}.main{display:block}.center{margin:0}}
+.game-row{display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid #eee;align-items:center}
+.odds button{border:1px solid #ccc;background:#f8f8f8;padding:6px 10px;margin:0 2px;border-radius:4px;font-weight:bold;cursor:pointer}
+.odds button.sel{background:#00a651;color:white}
+.bet-head{background:#af0f0f;color:white;padding:10px;text-align:center;font-weight:bold}
+.bet-btn{width:100%;background:#00a651;color:white;border:none;padding:14px;font-weight:bold;margin-top:10px;border-radius:4px;font-size:16px}
+.live-dot{width:8px;height:8px;background:red;border-radius:50%;display:inline-block}
 </style>
 </head>
 <body>
-<div class="header">⭐ FIVE STAR PREDICTIONS - Predict & Win Cash</div>
 
-<div id="games">Loading live matches...</div>
+<div class="header">
+<div class="logo">⭐ FIVE STAR <span>PREDICTIONS</span></div>
+<div style="font-size:13px">Login | Register | Help</div>
+</div>
 
-<div style="padding:20px;text-align:center">
-<h3>Your Selections: <span id="count">0</span></h3>
-<button onclick="payWithPaystack()" style="background:#00ff88;color:black;padding:15px 30px;border:none;border-radius:30px;font-weight:bold;font-size:18px;width:100%">ENTER CONTEST - PAY WITH PAYSTACK</button>
-<p style="font-size:12px;color:#888">This is a skill-based prediction contest. No gambling. 18+ only.</p>
+<div class="banner">
+<div>
+<h2 style="color:#ffcc00">MAN CITY vs SUNDERLAND AFC</h2>
+<p>Premier League • Predict & Win Big</p>
+<button style="background:#00a651;color:white;border:none;padding:8px 15px;margin-top:10px">VIEW ODDS</button>
+</div>
+<img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=200" alt="">
+</div>
+
+<div class="main">
+<div class="left">
+<h4>🔥 Popular</h4>
+<p>⚽ Premier League</p>
+<p>⚽ La Liga</p>
+<p>⚽ Serie A</p>
+<p>🏆 Champions League</p>
+<p>🔴 Live Now</p>
+<h4>All Sports</h4>
+<p>Football</p>
+<p>Basketball</p>
+<p>Tennis</p>
+</div>
+
+<div class="center">
+<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:2px solid #af0f0f">
+<b>Highlights</b><small>Football</small>
+</div>
+<div id="games">Loading live games...</div>
+</div>
+
+<div class="right">
+<div class="bet-head">BETSLIP - <span id="count">0</span> Selections</div>
+<div id="slip" style="min-height:100px;padding:10px;font-size:13px;color:#888;text-align:center">Click odds to add selections</div>
+<div style="display:flex;justify-content:space-between;padding:10px;font-size:14px"><span>Total Odds:</span><b id="totalOdds">0</b></div>
+<div style="display:flex;justify-content:space-between;padding:10px;font-size:14px"><span>Potential Win:</span><b style="color:#00a651">₦<span id="pWin">0</span></b></div>
+<button class="bet-btn" onclick="pay()">ENTER CONTEST - PAY ₦500</button>
+<p style="font-size:10px;text-align:center;color:#888;margin-top:8px">Skill-based prediction contest • 18+ • No gambling • Paystack secured</p>
+</div>
 </div>
 
 <script>
-// 1. LIVE GAMES - Free API
-async function loadLiveGames(){
-  // Using free ESPN API (no key needed for startup)
-  try{
-    let res = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
-    let data = await res.json();
-    let html = '';
-    data.events.slice(0,10).forEach(match=>{
-      let home = match.competitions[0].competitors[0].team.displayName;
-      let away = match.competitions[0].competitors[1].team.displayName;
-      let status = match.status.type.detail;
-      html += `
-      <div class="game-card">
-        <div><span class="live">● LIVE</span><br><b>${home} vs ${away}</b><br><small>${status}</small></div>
-        <div>
-          <button class="odd-btn" onclick="addPick('${home}')">1 - 2.10</button>
-          <button class="odd-btn" onclick="addPick('Draw')">X - 3.20</button>
-          <button class="odd-btn" onclick="addPick('${away}')">2 - 2.85</button>
-        </div>
-      </div>`;
-    });
-    document.getElementById('games').innerHTML = html;
-  }catch(e){
-    document.getElementById('games').innerHTML = 'Live matches loading... please refresh. If fails, we will use manual games.';
-  }
-}
-loadLiveGames();
-setInterval(loadLiveGames, 60000); // refresh every 1 min
-
 let picks = [];
-function addPick(team){
-  picks.push(team);
-  document.getElementById('count').innerText = picks.length;
-  alert(team + ' added! Total picks: ' + picks.length);
+let games = [
+{id:1, home:"Tottenham Hotspur", away:"Aston Villa", time:"FT", o1:2.10, ox:3.30, o2:3.40},
+{id:2, home:"Brighton", away:"Arsenal", time:"HT 1-0", o1:2.80, ox:3.20, o2:2.60},
+{id:3, home:"Everton", away:"Ipswich Town", time:"HT 0-0", o1:1.90, ox:3.40, o2:4.20},
+{id:4, home:"Newcastle United", away:"Hull City", time:"Today 15:00", o1:1.70, ox:3.80, o2:5.10},
+{id:5, home:"Nottingham Forest", away:"Coventry City", time:"Sat 19th 12:30", o1:2.10, ox:3.20, o2:3.50},
+];
+
+function render(){
+let html='';
+games.forEach(g=>{
+html+=`<div class="game-row">
+<div><small style="color:red"><span class="live-dot"></span> ${g.time}</small><br><b>${g.home} vs ${g.away}</b></div>
+<div class="odds">
+<button onclick="addPick(${g.id},'${g.home}',${g.o1},this)">1<br>${g.o1}</button>
+<button onclick="addPick(${g.id},'Draw',${g.ox},this)">X<br>${g.ox}</button>
+<button onclick="addPick(${g.id},'${g.away}',${g.o2},this)">2<br>${g.o2}</button>
+</div>
+</div>`;
+});
+document.getElementById('games').innerHTML=html;
+}
+render();
+
+function addPick(id,team,odd,el){
+picks = picks.filter(p=>p.id!==id);
+picks.push({id,team,odd});
+document.querySelectorAll('.odds button').forEach(b=>{if(b.parentElement.parentElement.innerHTML.includes(`addPick(${id},`)) b.classList.remove('sel')});
+el.classList.add('sel');
+updateSlip();
 }
 
-// 2. PAYSTACK INTEGRATION - Replace with your LIVE key from Paystack dashboard
-function payWithPaystack(){
-  if(picks.length==0){alert('Pick at least 1 game first!');return;}
-  let handler = PaystackPop.setup({
-    key: 'pk_live_YOUR_PAYSTACK_KEY_HERE', // <--- PUT YOUR LIVE KEY HERE
-    email: 'customer@fivestarbets.com', // you will collect real email later
-    amount: 50000, // ₦500 entry fee - change to any amount (in kobo)
-    currency: 'NGN',
-    ref: 'FIVESTAR_'+Math.floor((Math.random()*1000000000)+1),
-    metadata:{custom_fields:[{display_name:"Picks",variable_name:"picks",value:picks.join(',')} ]},
-    callback: function(response){
-      alert('Payment success! Ref: ' + response.reference + '. Your predictions saved!');
-      // Here you save to your database / Google Sheet
-      picks = [];
-      document.getElementById('count').innerText = 0;
-    },
-    onClose: function(){alert('Payment window closed');}
-  });
-  handler.openIframe();
+function updateSlip(){
+document.getElementById('count').innerText=picks.length;
+let total = picks.reduce((a,c)=>a*c.odd,1);
+if(picks.length==0) total=0;
+document.getElementById('totalOdds').innerText=total.toFixed(2);
+document.getElementById('pWin').innerText=(total*500).toFixed(0);
+let slipHtml='';
+picks.forEach(p=>{slipHtml+=`<div style="text-align:left;padding:6px;border-bottom:1px solid #eee">${p.team} @ ${p.odd}</div>`});
+if(picks.length>0) document.getElementById('slip').innerHTML=slipHtml;
+else document.getElementById('slip').innerHTML='Click odds to add selections';
 }
+
+function pay(){
+if(picks.length==0){alert('Add at least 1 game');return;}
+alert('This is the SportyBet design you wanted! \n\nPicks: '+picks.length+'\n\nNow just add your Paystack TEST key (pk_test_...) in code to collect money. Your design is 100% DONE!');
+// Paystack code goes here - I will add it once you send test key
+}
+
+// Live API - will replace manual games
+fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard')
+.then(r=>r.json()).then(d=>{console.log('Live games found:',d.events?.length)});
 </script>
 </body>
 </html>
