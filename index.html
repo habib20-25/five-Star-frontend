@@ -1,134 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Five Star Predictions - SportyBet Style</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIVE STAR - Predict & Win</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f5f5f5}
-.header{background:#af0f0f;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center}
-.header .logo{font-weight:900;font-size:22px}
-.header .logo span{color:#ffcc00}
-.banner{background:#000;color:white;display:flex;padding:15px;align-items:center;justify-content:space-between}
-.banner img{height:120px}
-.main{display:flex;max-width:1400px;margin:auto}
-.left{width:220px;background:white;border-right:1px solid #ddd;padding:15px;display:block}
-.left h4{font-size:13px;margin:15px 0 5px;color:#333}
-.left p{font-size:13px;padding:6px;cursor:pointer}
-.left p:hover{background:#f0f0f0}
-.center{flex:1;background:white;margin:0 10px;padding:10px}
-.right{width:300px;background:white;padding:10px;border-left:1px solid #ddd}
-@media(max-width:900px){.left,.right{display:none}.main{display:block}.center{margin:0}}
-.game-row{display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid #eee;align-items:center}
-.odds button{border:1px solid #ccc;background:#f8f8f8;padding:6px 10px;margin:0 2px;border-radius:4px;font-weight:bold;cursor:pointer}
-.odds button.sel{background:#00a651;color:white}
-.bet-head{background:#af0f0f;color:white;padding:10px;text-align:center;font-weight:bold}
-.bet-btn{width:100%;background:#00a651;color:white;border:none;padding:14px;font-weight:bold;margin-top:10px;border-radius:4px;font-size:16px}
-.live-dot{width:8px;height:8px;background:red;border-radius:50%;display:inline-block}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial}
+body{background:#0f1923;color:white}
+.top{height:60px;background:#0a121a;display:flex;justify-content:space-between;align-items:center;padding:0 15px;border-bottom:1px solid #1a2a3a;position:sticky;top:0;z-index:99}
+.logo{font-weight:900;font-size:18px;line-height:1}
+.logo span{color:#ffcc00;font-size:10px;display:block;letter-spacing:2px}
+.bal{background:#1a2a3a;padding:6px 10px;border-radius:20px;font-size:12px}
+.deposit{background:#00e676;color:#000;border:none;padding:8px 18px;border-radius:8px;font-weight:900;margin-left:8px}
+.main{display:flex;max-width:1500px;margin:auto;gap:10px;padding:10px}
+.left{width:240px;background:#111d29;border-radius:12px;padding:12px;height:fit-content}
+.left h4{color:#ffcc00;font-size:12px;margin:15px 0 8px}
+.left input{width:100%;background:#0f1923;border:1px solid #1e3246;border-radius:20px;padding:8px 12px;color:white;font-size:13px}
+.league{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;cursor:pointer;font-size:13px}
+.league:hover{background:#1a2a3a}
+.center{flex:1}
+.banner{background:linear-gradient(to right, #000, #222);border-radius:12px;padding:20px;display:flex;justify-content:space-between;align-items:center;border:1px solid #ffcc0050}
+.match-card{background:#111d29;border-radius:12px;padding:14px;margin-top:10px;border:1px solid #1e3246}
+.odds{display:flex;gap:8px;margin-top:10px}
+.odds button{flex:1;background:#0f1923;border:1px solid #d4af37;padding:10px;border-radius:8px;color:white;font-weight:bold}
+.odds button.active{background:#00e676;color:#000;border-color:#00e676}
+.right{width:320px;background:#111d29;border-radius:12px;padding:12px;height:fit-content;position:sticky;top:70px}
+.slip-head{color:#ffcc00;font-weight:900;display:flex;gap:8px}
+.stake{width:100%;background:#0f1923;border:1px solid #1e3246;padding:12px;border-radius:8px;color:white;margin-top:10px}
+.place{width:100%;background:#00e676;color:#000;border:none;padding:14px;border-radius:10px;font-weight:900;font-size:16px;margin-top:12px}
+@media(max-width:900px){.left{display:none}.right{position:fixed;bottom:0;left:0;right:0;width:100%;border-radius:12px 12px 0 0;z-index:100}.center{padding-bottom:180px}}
 </style>
 </head>
 <body>
-
-<div class="header">
-<div class="logo">⭐ FIVE STAR <span>PREDICTIONS</span></div>
-<div style="font-size:13px">Login | Register | Help</div>
-</div>
-
-<div class="banner">
-<div>
-<h2 style="color:#ffcc00">MAN CITY vs SUNDERLAND AFC</h2>
-<p>Premier League • Predict & Win Big</p>
-<button style="background:#00a651;color:white;border:none;padding:8px 15px;margin-top:10px">VIEW ODDS</button>
-</div>
-<img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=200" alt="">
+<div class="top">
+<div class="logo">⭐ FIVE STAR<br><span>PREDICT & WIN</span></div>
+<div style="display:flex;align-items:center"><div class="bal">Balance: ₦0.00</div><button class="deposit">DEPOSIT</button></div>
 </div>
 
 <div class="main">
 <div class="left">
-<h4>🔥 Popular</h4>
-<p>⚽ Premier League</p>
-<p>⚽ La Liga</p>
-<p>⚽ Serie A</p>
-<p>🏆 Champions League</p>
-<p>🔴 Live Now</p>
-<h4>All Sports</h4>
-<p>Football</p>
-<p>Basketball</p>
-<p>Tennis</p>
+<h4>⭐ POPULAR LEAGUES</h4>
+<input placeholder="Search leagues...">
+<div style="margin-top:10px">
+<div class="league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League - 120+ LIVE</div>
+<div class="league">🇳🇬 NPFL Nigeria - 15+ LIVE</div>
+<div class="league">🏆 CAF Champions</div>
+<div class="league">🇪🇸 La Liga</div>
+<div class="league">🇮🇹 Serie A</div>
+<div class="league">🇩🇪 Bundesliga</div>
+</div>
 </div>
 
 <div class="center">
-<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:2px solid #af0f0f">
-<b>Highlights</b><small>Football</small>
+<div class="banner">
+<div><span style="background:#222;padding:4px 10px;border-radius:20px;font-size:11px">⭐ LIVE FEATURED MATCH</span><h2 style="margin-top:8px">MAN CITY vs SUNDERLAND</h2><p style="background:#00e676;color:#000;display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;margin-top:6px">LIVE • 72:14 • Premier League</p></div>
+<div style="text-align:right"><p style="font-size:12px">Etihad Stadium • Today 8pm</p></div>
 </div>
-<div id="games">Loading live games...</div>
+
+<div style="margin-top:15px;font-weight:900;border-bottom:2px solid #ffcc00;display:inline-block;padding-bottom:5px">LIVE FOOTBALL MATCHES</div>
+<div id="games"></div>
 </div>
 
 <div class="right">
-<div class="bet-head">BETSLIP - <span id="count">0</span> Selections</div>
-<div id="slip" style="min-height:100px;padding:10px;font-size:13px;color:#888;text-align:center">Click odds to add selections</div>
-<div style="display:flex;justify-content:space-between;padding:10px;font-size:14px"><span>Total Odds:</span><b id="totalOdds">0</b></div>
-<div style="display:flex;justify-content:space-between;padding:10px;font-size:14px"><span>Potential Win:</span><b style="color:#00a651">₦<span id="pWin">0</span></b></div>
-<button class="bet-btn" onclick="pay()">ENTER CONTEST - PAY ₦500</button>
-<p style="font-size:10px;text-align:center;color:#888;margin-top:8px">Skill-based prediction contest • 18+ • No gambling • Paystack secured</p>
+<div class="slip-head">🎫 BET SLIP - <span id="c">0</span></div>
+<div id="slipList" style="margin-top:10px;color:#888;font-size:13px;text-align:center;padding:20px">Click odds to add to slip</div>
+<div style="margin-top:10px">Stake (₦)<input id="stake" class="stake" value="1000" type="number"></div>
+<div style="margin-top:10px;background:#1e3246;padding:10px;border-radius:8px;display:flex;justify-content:space-between"><span>Possible Win:</span><b style="color:#00e676">₦<span id="win">0</span></b></div>
+<button class="place" onclick="payNow()">PLACE BET - ₦<span id="winBtn">0</span></button>
+<p style="font-size:10px;color:#666;margin-top:8px;text-align:center">Min stake ₦100 • 18+ • Terms apply<br>Responsible Gaming</p>
 </div>
 </div>
 
 <script>
-let picks = [];
-let games = [
-{id:1, home:"Tottenham Hotspur", away:"Aston Villa", time:"FT", o1:2.10, ox:3.30, o2:3.40},
-{id:2, home:"Brighton", away:"Arsenal", time:"HT 1-0", o1:2.80, ox:3.20, o2:2.60},
-{id:3, home:"Everton", away:"Ipswich Town", time:"HT 0-0", o1:1.90, ox:3.40, o2:4.20},
-{id:4, home:"Newcastle United", away:"Hull City", time:"Today 15:00", o1:1.70, ox:3.80, o2:5.10},
-{id:5, home:"Nottingham Forest", away:"Coventry City", time:"Sat 19th 12:30", o1:2.10, ox:3.20, o2:3.50},
+let picks=[];
+const defaultGames=[
+{h:"Manchester City",a:"Sunderland",t:"LIVE 72:14",o1:1.80,ox:3.50,o2:4.20},
+{h:"Chelsea",a:"Arsenal",t:"LIVE 55:22",o1:2.25,ox:3.40,o2:3.10},
+{h:"Kano Pillars",a:"Enyimba",t:"LIVE 18:03",o1:1.95,ox:3.25,o2:3.80},
+{h:"Man City",a:"Sunderland AFC",t:"Today 18:30",o1:1.60,ox:3.80,o2:5.00},
 ];
-
-function render(){
+function render(games=defaultGames){
 let html='';
-games.forEach(g=>{
-html+=`<div class="game-row">
-<div><small style="color:red"><span class="live-dot"></span> ${g.time}</small><br><b>${g.home} vs ${g.away}</b></div>
+games.forEach((g,i)=>{
+html+=`<div class="match-card">
+<div style="display:flex;justify-content:space-between"><b>${g.h} vs ${g.a}</b><small style="color:#ff5555">● ${g.t}</small></div>
 <div class="odds">
-<button onclick="addPick(${g.id},'${g.home}',${g.o1},this)">1<br>${g.o1}</button>
-<button onclick="addPick(${g.id},'Draw',${g.ox},this)">X<br>${g.ox}</button>
-<button onclick="addPick(${g.id},'${g.away}',${g.o2},this)">2<br>${g.o2}</button>
+<button onclick="add(${i},'${g.h}',${g.o1},this)">1 ${g.o1}</button>
+<button onclick="add(${i},'X',${g.ox},this)">X ${g.ox}</button>
+<button onclick="add(${i},'${g.a}',${g.o2},this)">2 ${g.o2}</button>
 </div>
 </div>`;
 });
 document.getElementById('games').innerHTML=html;
 }
 render();
-
-function addPick(id,team,odd,el){
-picks = picks.filter(p=>p.id!==id);
+function add(id,team,odd,el){
+picks=picks.filter(p=>p.id!==id);
 picks.push({id,team,odd});
-document.querySelectorAll('.odds button').forEach(b=>{if(b.parentElement.parentElement.innerHTML.includes(`addPick(${id},`)) b.classList.remove('sel')});
-el.classList.add('sel');
-updateSlip();
+document.querySelectorAll('.match-card').forEach((card,idx)=>{if(idx===id)card.querySelectorAll('button').forEach(b=>b.classList.remove('active'))});
+el.classList.add('active');
+update();
 }
-
-function updateSlip(){
-document.getElementById('count').innerText=picks.length;
-let total = picks.reduce((a,c)=>a*c.odd,1);
-if(picks.length==0) total=0;
-document.getElementById('totalOdds').innerText=total.toFixed(2);
-document.getElementById('pWin').innerText=(total*500).toFixed(0);
-let slipHtml='';
-picks.forEach(p=>{slipHtml+=`<div style="text-align:left;padding:6px;border-bottom:1px solid #eee">${p.team} @ ${p.odd}</div>`});
-if(picks.length>0) document.getElementById('slip').innerHTML=slipHtml;
-else document.getElementById('slip').innerHTML='Click odds to add selections';
+function update(){
+document.getElementById('c').innerText=picks.length;
+let stake=parseInt(document.getElementById('stake').value)||1000;
+let total=picks.reduce((a,c)=>a*c.odd,1);
+if(picks.length===0) total=0;
+let win=(total*stake).toFixed(0);
+document.getElementById('win').innerText=win;
+document.getElementById('winBtn').innerText=win;
+let list='';
+picks.forEach(p=>{list+=`<div style="display:flex;justify-content:space-between;background:#0f1923;padding:8px;border-radius:6px;margin-bottom:6px"><span>${p.team}</span><b>${p.odd}</b></div>`});
+if(picks.length>0)document.getElementById('slipList').innerHTML=list;
+else document.getElementById('slipList').innerHTML='Click odds to add to slip';
 }
+document.getElementById('stake').addEventListener('input',update);
 
-function pay(){
-if(picks.length==0){alert('Add at least 1 game');return;}
-alert('This is the SportyBet design you wanted! \n\nPicks: '+picks.length+'\n\nNow just add your Paystack TEST key (pk_test_...) in code to collect money. Your design is 100% DONE!');
-// Paystack code goes here - I will add it once you send test key
-}
-
-// Live API - will replace manual games
+// Live real games - will auto replace
 fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard')
-.then(r=>r.json()).then(d=>{console.log('Live games found:',d.events?.length)});
+.then(r=>r.json()).then(d=>{
+if(d.events?.length>0){
+let live=d.events.slice(0,5).map(e=>{
+return {h:e.competitions[0].competitors[0].team.displayName,a:e.competitions[0].competitors[1].team.displayName,t:e.status.type.detail,o1:1.90,ox:3.30,o2:3.80}
+});
+render(live);
+}
+});
+
+function payNow(){
+if(picks.length===0){alert('Add game first');return;}
+let stake=document.getElementById('stake').value;
+// TODO: Insert your Paystack key here
+if(typeof PaystackPop==='undefined'){alert('Paystack script not loaded');return;}
+let handler=PaystackPop.setup({
+key: 'pk_test_YOUR_KEY_HERE', // <-- Change to your pk_test_xxx for now, pk_live_xxx when approved
+email: 'customer@fivestar.ng',
+amount: parseInt(stake)*100,
+currency:'NGN',
+ref: 'FIVESTAR_'+Date.now(),
+callback:function(res){alert('Payment success! '+res.reference+' - You staked ₦'+stake);picks=[];update();render();},
+onClose:function(){}
+});
+handler.openIframe();
+}
 </script>
 </body>
 </html>
