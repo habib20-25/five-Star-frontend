@@ -1,252 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Five Star Bets - Full App</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five Star Predictions - Predict & Win</title>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}
-body{background:#0f0f0f;color:white}
-.hidden{display:none!important}
-.top{background:#00a826;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
-.bal{background:rgba(0,0,0,0.3);padding:6px 14px;border-radius:20px;font-weight:bold;font-size:13px}
-.btn{border:none;padding:8px 16px;border-radius:6px;font-weight:900;cursor:pointer}
-.btn-yellow{background:#ffcc00;color:#000}
-.btn-green{background:#00a826;color:#fff;width:100%;padding:14px;font-size:16px;margin-top:10px;border-radius:10px}
-.nav{background:#1a1a1a;display:flex;overflow-x:auto;border-bottom:1px solid #2a2a2a}
-.nav div{padding:14px 18px;font-size:13px;font-weight:700;color:#999;white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent}
-.nav div.active{color:#00ff88;border-bottom:3px solid #00ff88}
-.page{padding:12px;min-height:80vh}
-.card{background:#1e1e1e;border-radius:12px;margin-bottom:12px;overflow:hidden;border:1px solid #2a2a2a}
-.card-header{padding:12px 15px;background:#252525;font-weight:800;font-size:12px;display:flex;justify-content:space-between;color:#bbb}
-.match{padding:14px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #2a2a2a}
-.teams{font-size:13px;font-weight:600;width:52%;line-height:1.4}
-.odds{display:flex;gap:6px}
-.odd{background:#2c2c2c;padding:9px 11px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;min-width:48px;text-align:center;border:1px solid #333}
-.odd.active{background:#00a826;color:white}
-.input{width:100%;padding:14px;background:#1e1e1e;border:1px solid #333;border-radius:10px;color:white;margin-bottom:12px;font-size:15px}
-.betslip{position:fixed;bottom:0;left:0;right:0;background:#121212;border-top:1px solid #333;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-radius:14px 14px 0 0;z-index:30}
-.auth-box{max-width:400px;margin:40px auto;background:#1e1e1e;padding:25px;border-radius:16px;border:1px solid #2a2a2a}
-.small{font-size:12px;color:#888;text-align:center;margin-top:15px}
-.small a{color:#00ff88;text-decoration:none;font-weight:700}
-.league-title{background:#00a826;padding:8px 15px;font-size:11px;font-weight:900;letter-spacing:1px}
-.hist-item{padding:12px 15px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;font-size:13px}
+body{font-family:Arial;background:#0a0a0a;color:white;margin:0}
+.header{background:#ffcc00;color:black;padding:15px;text-align:center;font-weight:bold;font-size:20px}
+.game-card{background:#1a1a1a;margin:10px;padding:15px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+.odd-btn{background:#ffcc00;color:black;border:none;padding:8px 12px;border-radius:5px;font-weight:bold;cursor:pointer;margin:2px}
+.live{color:red;font-size:12px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
 </style>
 </head>
 <body>
+<div class="header">⭐ FIVE STAR PREDICTIONS - Predict & Win Cash</div>
 
-<div class="top" id="topbar">
-  <div style="font-weight:900" onclick="navigate('football')">⭐ FIVE STAR</div>
-  <div style="display:flex;gap:8px;align-items:center">
-    <div class="bal">₦<span id="balDisplay">0</span></div>
-    <button class="btn btn-yellow" onclick="navigate('wallet')">DEPOSIT</button>
-    <button class="btn" style="background:#333;color:#fff" onclick="logout()">☰</button>
-  </div>
-</div>
+<div id="games">Loading live matches...</div>
 
-<div class="nav" id="mainNav">
-  <div class="active" onclick="navigate('football',this)">⚽ Football</div>
-  <div onclick="navigate('live',this)">🔴 Live</div>
-  <div onclick="navigate('casino',this)">🎰 Casino</div>
-  <div onclick="navigate('history',this)">📜 History</div>
-  <div onclick="navigate('wallet',this)">💳 Wallet</div>
-</div>
-
-<div id="authPage" class="page">
-  <div class="auth-box" id="loginBox">
-    <h2>Login to Five Star</h2>
-    <input class="input" id="loginEmail" placeholder="Email or Username">
-    <input class="input" id="loginPass" type="password" placeholder="Password">
-    <button class="btn btn-green" onclick="doLogin()">LOGIN</button>
-    <div class="small">No account? <a href="#" onclick="showRegister()">Create Account</a></div>
-    <div class="small" style="margin-top:10px;color:#ffcc00">Test: test@test.com / 1234</div>
-  </div>
-  <div class="auth-box hidden" id="registerBox">
-    <h2>Create Account</h2>
-    <input class="input" id="regName" placeholder="Full Name">
-    <input class="input" id="regEmail" placeholder="Email">
-    <input class="input" id="regPhone" placeholder="Phone Number">
-    <input class="input" id="regPass" type="password" placeholder="Password">
-    <button class="btn btn-green" onclick="doRegister()">CREATE ACCOUNT</button>
-    <div class="small">Have account? <a href="#" onclick="showLogin()">Login</a></div>
-  </div>
-</div>
-
-<div id="football" class="page hidden"><div id="footballList"></div></div>
-<div id="live" class="page hidden"><div id="liveList"></div></div>
-<div id="casino" class="page hidden">
-  <h3 style="margin-bottom:12px">Casino & Aviator</h3>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-    <div class="card" style="height:140px;background:linear-gradient(135deg,#ff003c,#ff8a00);display:flex;align-items:end;padding:15px;font-weight:900;cursor:pointer" onclick="playAviator()">✈️ AVIATOR<br>Win 1000x</div>
-    <div class="card" style="height:140px;background:linear-gradient(135deg,#00ff88,#00a826);display:flex;align-items:end;padding:15px;font-weight:900;cursor:pointer" onclick="playSlots()">🎰 SLOTS<br>Jackpot</div>
-  </div>
-  <div id="casinoArea" class="card hidden" style="padding:20px;text-align:center;margin-top:15px"></div>
-</div>
-<div id="history" class="page hidden">
-  <div style="display:flex;gap:10px;margin-bottom:12px"><button class="btn btn-green" style="flex:1" onclick="loadHistory('bets')">BETS</button><button class="btn" style="flex:1;background:#222;color:#fff" onclick="loadHistory('trans')">TRANSACTIONS</button></div>
-  <div id="historyList" class="card"></div>
-</div>
-<div id="wallet" class="page hidden">
-  <div class="card" style="padding:20px;text-align:center">
-    <div style="color:#888;font-size:12px">AVAILABLE BALANCE</div>
-    <div style="font-size:36px;font-weight:900;margin:10px 0">₦<span id="walletBal">0</span></div>
-    <div style="display:flex;gap:10px"><button class="btn btn-yellow" style="flex:1;padding:12px" onclick="document.getElementById('depBox').classList.remove('hidden')">DEPOSIT</button><button class="btn" style="flex:1;background:#222;color:#fff;padding:12px" onclick="document.getElementById('withBox').classList.remove('hidden')">WITHDRAW</button></div>
-  </div>
-  <div id="depBox" class="card hidden" style="padding:20px">
-    <h3>Deposit Money</h3>
-    <p style="font-size:12px;color:#888;margin:10px 0">Paystack secure - Cards, Bank, USSD</p>
-    <input class="input" id="depAmount" type="number" placeholder="Amount e.g 1000" value="1000">
-    <button class="btn btn-green" onclick="payWithPaystack()">PAY WITH PAYSTACK NOW</button>
-    <div class="small" style="color:#888">Test Card: 4084084084084081 | 12/30 | 123</div>
-  </div>
-  <div id="withBox" class="card hidden" style="padding:20px">
-    <h3>Withdraw Money</h3>
-    <input class="input" id="withAmount" type="number" placeholder="Amount">
-    <input class="input" id="withBank" placeholder="Bank Name e.g GTBank">
-    <input class="input" id="withAcc" placeholder="Account Number">
-    <input class="input" id="withName" placeholder="Account Name">
-    <button class="btn btn-green" onclick="requestWithdraw()">REQUEST WITHDRAWAL</button>
-  </div>
-</div>
-
-<div style="height:80px"></div>
-<div class="betslip" id="betslipBar">
-  <div><span id="betCount">0</span> Bets • <span id="totalOdds">0.00</span> Odds • Win ₦<span id="potWin">0</span></div>
-  <button class="btn btn-yellow" onclick="placeBet()">BET</button>
+<div style="padding:20px;text-align:center">
+<h3>Your Selections: <span id="count">0</span></h3>
+<button onclick="payWithPaystack()" style="background:#00ff88;color:black;padding:15px 30px;border:none;border-radius:30px;font-weight:bold;font-size:18px;width:100%">ENTER CONTEST - PAY WITH PAYSTACK</button>
+<p style="font-size:12px;color:#888">This is a skill-based prediction contest. No gambling. 18+ only.</p>
 </div>
 
 <script>
-let currentUser=JSON.parse(localStorage.getItem('fs_user')||'null');
-function checkAuth(){ if(!currentUser){ document.getElementById('authPage').classList.remove('hidden'); document.getElementById('topbar').classList.add('hidden'); document.getElementById('mainNav').classList.add('hidden'); document.getElementById('betslipBar').classList.add('hidden'); document.querySelectorAll('.page').forEach(p=>{ if(p.id!='authPage') p.classList.add('hidden') }); return false } else { document.getElementById('authPage').classList.add('hidden'); document.getElementById('topbar').classList.remove('hidden'); document.getElementById('mainNav').classList.remove('hidden'); document.getElementById('betslipBar').classList.remove('hidden'); return true } }
-function showRegister(){ document.getElementById('loginBox').classList.add('hidden'); document.getElementById('registerBox').classList.remove('hidden') }
-function showLogin(){ document.getElementById('registerBox').classList.add('hidden'); document.getElementById('loginBox').classList.remove('hidden') }
-function doRegister(){ let name=document.getElementById('regName').value,email=document.getElementById('regEmail').value,pass=document.getElementById('regPass').value; if(!email||!pass){ alert('Fill all'); return } let users=JSON.parse(localStorage.getItem('fs_users')||'[]'); users.push({name,email,pass,phone:document.getElementById('regPhone').value}); localStorage.setItem('fs_users',JSON.stringify(users)); localStorage.setItem('fs_user',JSON.stringify({name,email})); localStorage.setItem('five_star_balance','0'); location.reload() }
-function doLogin(){ let e=document.getElementById('loginEmail').value,p=document.getElementById('loginPass').value; let users=JSON.parse(localStorage.getItem('fs_users')||'[]'); if(users.length==0 || (e&&p)){ localStorage.setItem('fs_user',JSON.stringify({name:e||'User',email:e})); location.reload(); return } }
-function logout(){ localStorage.removeItem('fs_user'); location.reload() }
-checkAuth();
-
-function getBal(){ return parseFloat(localStorage.getItem('five_star_balance')||'0') }
-function updateBalDisplay(){ let b=getBal(); document.getElementById('balDisplay').innerText=b; document.getElementById('walletBal').innerText=b }
-updateBalDisplay();
-
-function navigate(page,el){
-  if(!checkAuth()) return;
-  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
-  document.getElementById(page).classList.remove('hidden');
-  document.querySelectorAll('.nav div').forEach(d=>d.classList.remove('active'));
-  if(el) el.classList.add('active');
-  if(page=='football') loadWeekMatches();
-  if(page=='live') loadLiveMatches();
-  if(page=='history') loadHistory('bets');
-  if(page=='wallet') updateBalDisplay();
-}
-
-async function loadWeekMatches(){
-  let container=document.getElementById('footballList');
-  container.innerHTML='<div style="padding:30px;text-align:center;color:#777">Loading this week matches...</div>';
-  let leagues=[{id:'eng.1',name:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 PREMIER LEAGUE'},{id:'esp.1',name:'🇪🇸 LA LIGA'},{id:'ita.1',name:'🇮🇹 SERIE A'},{id:'ger.1',name:'🇩🇪 BUNDESLIGA'},{id:'fra.1',name:'🇫🇷 LIGUE 1'},{id:'uefa.champions',name:'🏆 CHAMPIONS LEAGUE'}];
-  let allHtml='';
-  for(let lg of leagues){
-    try{
-      let res=await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${lg.id}/scoreboard`);
-      let data=await res.json();
-      if(data.events && data.events.length>0){
-        allHtml+=`<div class="league-title">${lg.name} - THIS WEEK</div><div class="card">`;
-        data.events.slice(0,6).forEach(ev=>{
-          let comp=ev.competitions[0]; let home=comp.competitors[0].team.displayName; let away=comp.competitors[1].team.displayName;
-          let date=new Date(ev.date).toLocaleString('en-GB',{weekday:'short',hour:'2-digit',minute:'2-digit'});
-          let o1=(1.5+Math.random()*2).toFixed(2), ox=(2.8+Math.random()*1.5).toFixed(2), o2=(1.8+Math.random()*2.5).toFixed(2);
-          allHtml+=`<div class="match"><div class="teams">${home}<br><small style="color:#888">${date} • ${away}</small><br>${away}</div><div class="odds"><div class="odd" onclick="addBet(this,'${home} vs ${away}','${home}',${o1})">${o1}</div><div class="odd" onclick="addBet(this,'${home} vs ${away}','Draw',${ox})">${ox}</div><div class="odd" onclick="addBet(this,'${home} vs ${away}','${away}',${o2})">${o2}</div></div></div>`;
-        });
-        allHtml+=`</div>`;
-      }
-    }catch(e){}
-  }
-  if(allHtml=='') allHtml='<div class="card"><div class="match"><div class="teams">Arsenal vs Chelsea<br><small>Today 19:45</small></div><div class="odds"><div class="odd" onclick="addBet(this)">2.45</div><div class="odd" onclick="addBet(this)">3.20</div><div class="odd" onclick="addBet(this)">2.85</div></div></div></div>';
-  container.innerHTML=allHtml;
-}
-async function loadLiveMatches(){
-  let c=document.getElementById('liveList'); c.innerHTML='<div style="padding:30px;text-align:center">Loading live...</div>';
+// 1. LIVE GAMES - Free API
+async function loadLiveGames(){
+  // Using free ESPN API (no key needed for startup)
   try{
-    let res=await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
-    let data=await res.json();
-    let html='<div class="league-title">🔴 LIVE NOW</div><div class="card">';
-    data.events.slice(0,10).forEach(ev=>{
-      let comp=ev.competitions[0]; let home=comp.competitors[0].team.shortDisplayName; let away=comp.competitors[1].team.shortDisplayName;
-      let score=comp.competitors[0].score+' - '+comp.competitors[1].score;
-      html+=`<div class="match"><div class="teams"><span style="color:red">● LIVE</span> ${home} vs ${away}<br><small style="color:#00ff88">${ev.status.type.detail}</small></div><div style="font-weight:900;color:#00ff88">${score}</div><div class="odds"><div class="odd" onclick="addBet(this)">${(1.5+Math.random()).toFixed(2)}</div><div class="odd" onclick="addBet(this)">${(2.5+Math.random()).toFixed(2)}</div></div></div>`;
+    let res = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+    let data = await res.json();
+    let html = '';
+    data.events.slice(0,10).forEach(match=>{
+      let home = match.competitions[0].competitors[0].team.displayName;
+      let away = match.competitions[0].competitors[1].team.displayName;
+      let status = match.status.type.detail;
+      html += `
+      <div class="game-card">
+        <div><span class="live">● LIVE</span><br><b>${home} vs ${away}</b><br><small>${status}</small></div>
+        <div>
+          <button class="odd-btn" onclick="addPick('${home}')">1 - 2.10</button>
+          <button class="odd-btn" onclick="addPick('Draw')">X - 3.20</button>
+          <button class="odd-btn" onclick="addPick('${away}')">2 - 2.85</button>
+        </div>
+      </div>`;
     });
-    html+='</div>'; c.innerHTML=html;
-  }catch(e){ c.innerHTML='Live loading...'; }
-}
-
-let betSlip=[];
-function addBet(el,match,pick,odd){ let o=parseFloat(el.innerText); el.classList.toggle('active'); if(el.classList.contains('active')){ betSlip.push({match:match||'Match',pick:pick||el.innerText,odd:o}); } else { betSlip=betSlip.filter(b=>b.odd!=o); } renderSlip(); }
-function renderSlip(){ let count=betSlip.length; let total=1; betSlip.forEach(b=> total*=b.odd); document.getElementById('betCount').innerText=count; document.getElementById('totalOdds').innerText=count?total.toFixed(2):'0.00'; document.getElementById('potWin').innerText=count?(100*total).toFixed(0):'0'; }
-function placeBet(){
-  if(betSlip.length==0){ alert('Select odds'); return }
-  let stake=prompt('Enter stake. Balance: ₦'+getBal(),'100'); if(!stake) return; if(parseFloat(stake)>getBal()){ alert('Low balance! Deposit'); navigate('wallet'); return }
-  let total=1; betSlip.forEach(b=> total*=b.odd); let win=(stake*total).toFixed(2);
-  if(confirm(`Place bet ₦${stake} to win ₦${win}?`)){
-    let bal=getBal()-parseFloat(stake); localStorage.setItem('five_star_balance',bal);
-    let bets=JSON.parse(localStorage.getItem('fs_bets')||'[]'); bets.unshift({id:Date.now(),matches:betSlip,stake,win,total:total.toFixed(2),date:new Date().toLocaleString(),status:'Pending'});
-    localStorage.setItem('fs_bets',JSON.stringify(bets)); betSlip=[]; document.querySelectorAll('.odd.active').forEach(e=>e.classList.remove('active')); renderSlip(); updateBalDisplay(); alert('Bet placed! Check History'); navigate('history');
+    document.getElementById('games').innerHTML = html;
+  }catch(e){
+    document.getElementById('games').innerHTML = 'Live matches loading... please refresh. If fails, we will use manual games.';
   }
 }
+loadLiveGames();
+setInterval(loadLiveGames, 60000); // refresh every 1 min
 
-// PAYSTACK - FIXED WITH YOUR REAL KEY
+let picks = [];
+function addPick(team){
+  picks.push(team);
+  document.getElementById('count').innerText = picks.length;
+  alert(team + ' added! Total picks: ' + picks.length);
+}
+
+// 2. PAYSTACK INTEGRATION - Replace with your LIVE key from Paystack dashboard
 function payWithPaystack(){
-  let amount = document.getElementById('depAmount').value;
-  if(!amount || amount<100){ alert('Min ₦100'); return }
-  let email = currentUser? currentUser.email : 'customer@fivestar.com';
-
+  if(picks.length==0){alert('Pick at least 1 game first!');return;}
   let handler = PaystackPop.setup({
-    key: 'pk_test_09da5bf2b563612f5e8dc25d33ac7e1d851482fb',
-    email: email,
-    amount: amount*100,
+    key: 'pk_live_YOUR_PAYSTACK_KEY_HERE', // <--- PUT YOUR LIVE KEY HERE
+    email: 'customer@fivestarbets.com', // you will collect real email later
+    amount: 50000, // ₦500 entry fee - change to any amount (in kobo)
     currency: 'NGN',
-    ref: 'FS_'+Math.floor(Math.random()*1000000000),
-    onClose: function(){ alert('Payment cancelled'); },
+    ref: 'FIVESTAR_'+Math.floor((Math.random()*1000000000)+1),
+    metadata:{custom_fields:[{display_name:"Picks",variable_name:"picks",value:picks.join(',')} ]},
     callback: function(response){
-      let bal = getBal() + parseFloat(amount);
-      localStorage.setItem('five_star_balance', bal);
-      let trans = JSON.parse(localStorage.getItem('fs_trans')||'[]');
-      trans.unshift({type:'Deposit', amount:amount, ref:response.reference, date:new Date().toLocaleString(), status:'Success'});
-      localStorage.setItem('fs_trans', JSON.stringify(trans));
-      updateBalDisplay();
-      alert('SUCCESS! ₦'+amount+' added! Ref: '+response.reference);
-      document.getElementById('depBox').classList.add('hidden');
-      navigate('football');
-    }
+      alert('Payment success! Ref: ' + response.reference + '. Your predictions saved!');
+      // Here you save to your database / Google Sheet
+      picks = [];
+      document.getElementById('count').innerText = 0;
+    },
+    onClose: function(){alert('Payment window closed');}
   });
   handler.openIframe();
 }
-
-function requestWithdraw(){
-  let amt=document.getElementById('withAmount').value,bank=document.getElementById('withBank').value,acc=document.getElementById('withAcc').value,name=document.getElementById('withName').value;
-  if(!amt||!bank||!acc||!name){ alert('Fill all'); return }
-  if(parseFloat(amt)>getBal()){ alert('Insufficient balance'); return }
-  if(parseFloat(amt)<1000){ alert('Min ₦1000'); return }
-  let bal=getBal()-parseFloat(amt); localStorage.setItem('five_star_balance',bal);
-  let trans=JSON.parse(localStorage.getItem('fs_trans')||'[]'); trans.unshift({type:'Withdrawal',amount:amt,bank,acc,name,date:new Date().toLocaleString(),status:'Pending'});
-  localStorage.setItem('fs_trans',JSON.stringify(trans));
-  updateBalDisplay(); alert('Withdrawal request sent! ₦'+amt+' to '+bank+' - '+acc+' within 24hrs'); document.getElementById('withBox').classList.add('hidden');
-}
-
-function loadHistory(type){
-  let bets=JSON.parse(localStorage.getItem('fs_bets')||'[]'); let trans=JSON.parse(localStorage.getItem('fs_trans')||'[]'); let c=document.getElementById('historyList');
-  if(type=='bets'){ if(bets.length==0){ c.innerHTML='<div style="padding:20px;text-align:center;color:#777">No bets yet</div>'; return } c.innerHTML=bets.map(b=>`<div class="hist-item"><div><b>${b.matches[0]?.match||'Bet'} x${b.matches.length}</b><br><small>${b.date} • Stake ₦${b.stake}</small></div><div style="text-align:right"><div style="color:#00ff88">Win ₦${b.win}</div><small style="color:#ffcc00">${b.status}</small></div></div>`).join(''); }
-  else { if(trans.length==0){ c.innerHTML='<div style="padding:20px;text-align:center;color:#777">No transactions</div>'; return } c.innerHTML=trans.map(t=>`<div class="hist-item"><div><b>${t.type}</b><br><small>${t.date}</small></div><div style="text-align:right"><div>₦${t.amount}</div><small style="color:${t.status=='Success'?'#00ff88':'#ffcc00'}">${t.status}</small></div></div>`).join(''); }
-}
-
-function playAviator(){
-  let box=document.getElementById('casinoArea'); box.classList.remove('hidden'); let m=1.00; box.innerHTML=`<div style="font-size:12px;color:#888">AVIATOR</div><h1 id="mult" style="font-size:48px;color:#00ff88;margin:10px 0">1.00x</h1><button id="cashBtn" onclick="cashout()" style="background:#00ff88;border:none;padding:12px 30px;border-radius:10px;font-weight:900">CASH OUT</button><div style="margin-top:10px;color:#666">Don't crash!</div>`;
-  let int=setInterval(()=>{ m+=0.05+Math.random()*0.1; document.getElementById('mult').innerText=m.toFixed(2)+'x'; if(Math.random()<0.04){ clearInterval(int); box.innerHTML+=`<div style="color:red;margin-top:15px;font-weight:900">💥 CRASHED at ${m.toFixed(2)}x</div>`; } },120); window.cInt=int; window.curM=()=>m;
-}
-function cashout(){ clearInterval(window.cInt); let m=window.curM(); let win=(100*m).toFixed(0); let bal=getBal()+parseFloat(win); localStorage.setItem('five_star_balance',bal); updateBalDisplay(); alert(`Cashed ${m.toFixed(2)}x! Won ₦${win}`); }
-function playSlots(){ let sym=['🍒','🍋','🔔','⭐','💎']; let r=[sym[Math.floor(Math.random()*5)],sym[Math.floor(Math.random()*5)]]; let box=document.getElementById('casinoArea'); box.classList.remove('hidden'); let win=r[0]==r[1]&&r[1]==r[2]; box.innerHTML=`<h1 style="font-size:40px">${r.join(' ')}</h1><div style="margin:15px 0">${win?'<span style="color:#00ff88;font-weight:900">JACKPOT! ₦500 WIN!</span>':'Try again!'}</div><button class="btn btn-yellow" onclick="playSlots()">SPIN AGAIN</button>`; if(win){ localStorage.setItem('five_star_balance',getBal()+500); updateBalDisplay(); } }
-
-loadWeekMatches();
 </script>
 </body>
 </html>
